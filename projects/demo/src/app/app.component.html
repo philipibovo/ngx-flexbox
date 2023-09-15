@@ -1,0 +1,1406 @@
+<div class="wrap" pbFxLayout="column" pbFxLayoutAlign="stretch start">
+  <div id="logo" pbFxLayout="row" pbFxLayoutAlign="center center">
+    <div
+      pbFxSize.xs="90%"
+      pbFxSize.sm="80%"
+      pbFxSize.md="65%"
+      pbFxSize.lg="50%"
+      pbFxSize.xl="40%"
+    >
+      <img src="../assets/ngx-flexbox-logo-inline.svg" alt="" />
+    </div>
+  </div>
+
+  <section id="layout" pbFxLayout="column" pbFxLayoutAlign="center start">
+    <div class="content" pbFxLayout="column" pbFxLayoutAlign="stretch start">
+      <h1
+        class="title"
+        [class.center]="isScreenXS || isScreenSM"
+        pbFxLayout.xs="column"
+        pbFxLayout.sm="column"
+        pbFxLayout.md="row"
+        pbFxLayout.lg="row"
+        pbFxLayout.xl="row"
+        pbFxLayoutAlign.xs="center start"
+        pbFxLayoutAlign.sm="center start"
+        pbFxLayoutAlign.md="start start"
+        pbFxLayoutAlign.lg="start start"
+        pbFxLayoutAlign.xl="start start"
+      >
+        <span>pbFxLayout</span>
+        <span *ngIf="isScreenMD || isScreenLG || isScreenXL">
+          &nbsp;-&nbsp;
+        </span>
+        <span>Layout children alignment</span>
+      </h1>
+
+      <div
+        class="showcase margin-bottom-10"
+        [pbFxLayout]="childrenAlignmentLayout"
+        [pbFxLayoutAlign]="childrenAlignmentLayoutAlign"
+      >
+        <div class="item" pbFxLayout="row" pbFxLayoutAlign="center center">
+          1
+        </div>
+        <div class="item" pbFxLayout="row" pbFxLayoutAlign="center center">
+          2
+        </div>
+        <div class="item" pbFxLayout="row" pbFxLayoutAlign="center center">
+          3
+        </div>
+        <div class="item" pbFxLayout="row" pbFxLayoutAlign="center center">
+          4
+        </div>
+        <div class="item" pbFxLayout="row" pbFxLayoutAlign="center center">
+          5
+        </div>
+      </div>
+
+      <div
+        class="section-options padding-bottom-20"
+        pbFxLayout="column"
+        pbFxLayoutAlign="stretch space-around"
+      >
+        <div
+          class="code margin-bottom-20"
+          pbFxLayout.xs="column"
+          pbFxLayout.sm="column"
+          pbFxLayout.md="row"
+          pbFxLayout.lg="row"
+          pbFxLayout.xl="row"
+          pbFxLayoutAlign="center center"
+          pbFxGap.xs="0"
+          pbFxGap.sm="0"
+          pbFxGap.md="30px"
+          pbFxGap.lg="30px"
+          pbFxGap.xl="30px"
+        >
+          <span>pbFxLayout="{{ childrenAlignmentLayout }}"</span>
+          <span>pbFxLayoutAlign="{{ childrenAlignmentLayoutAlign }}"</span>
+        </div>
+
+        <div
+          pbFxLayout.xs="column"
+          pbFxLayout.sm="column"
+          pbFxLayout.md="row"
+          pbFxLayout.lg="row"
+          pbFxLayout.xl="row"
+          pbFxLayoutAlign.xs="center start"
+          pbFxLayoutAlign.sm="center start"
+          pbFxLayoutAlign.md="stretch space-around"
+          pbFxLayoutAlign.lg="stretch space-around"
+          pbFxLayoutAlign.xl="stretch space-around"
+          pbFxGap.xs="20px"
+          pbFxGap.sm="20px"
+          pbFxGap.md="0"
+          pbFxGap.lg="0"
+          pbFxGap.xl="0"
+        >
+          <div pbFxLayout="row" pbFxLayoutAlign="center center">
+            <div pbFxSize="150px">
+              <h2 class="subtitle">Direction</h2>
+              <div class="control-group">
+                <label class="control control-radio">
+                  column
+                  <input
+                    type="radio"
+                    name="radio-direction"
+                    [checked]="childrenAlignmentLayout === 'column'"
+                    (click)="childrenAlignmentLayout = 'column'"
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  column-reverse
+                  <input
+                    type="radio"
+                    name="radio-direction"
+                    [checked]="childrenAlignmentLayout === 'column-reverse'"
+                    (click)="childrenAlignmentLayout = 'column-reverse'"
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  row
+                  <input
+                    type="radio"
+                    name="radio-direction"
+                    [checked]="childrenAlignmentLayout === 'row'"
+                    (click)="childrenAlignmentLayout = 'row'"
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  row-reverse
+                  <input
+                    type="radio"
+                    name="radio-direction"
+                    [checked]="childrenAlignmentLayout === 'row-reverse'"
+                    (click)="childrenAlignmentLayout = 'row-reverse'"
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div pbFxLayout="row" pbFxLayoutAlign="center center">
+            <div pbFxSize="150px">
+              <h2 class="subtitle">Align Items</h2>
+              <div class="control-group">
+                <label class="control control-radio">
+                  start
+                  <input
+                    type="radio"
+                    name="radio-align"
+                    [checked]="
+                      childrenAlignmentLayoutAlign.split(' ')[0] === 'start'
+                    "
+                    (click)="
+                      changeLayoutAlignShow(
+                        'start',
+                        childrenAlignmentLayoutAlign.split(' ')[1]
+                      )
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  center
+                  <input
+                    type="radio"
+                    name="radio-align"
+                    [checked]="
+                      childrenAlignmentLayoutAlign.split(' ')[0] === 'center'
+                    "
+                    (click)="
+                      changeLayoutAlignShow(
+                        'center',
+                        childrenAlignmentLayoutAlign.split(' ')[1]
+                      )
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  end
+                  <input
+                    type="radio"
+                    name="radio-align"
+                    [checked]="
+                      childrenAlignmentLayoutAlign.split(' ')[0] === 'end'
+                    "
+                    (click)="
+                      changeLayoutAlignShow(
+                        'end',
+                        childrenAlignmentLayoutAlign.split(' ')[1]
+                      )
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  stretch
+                  <input
+                    type="radio"
+                    name="radio-align"
+                    [checked]="
+                      childrenAlignmentLayoutAlign.split(' ')[0] === 'stretch'
+                    "
+                    (click)="
+                      changeLayoutAlignShow(
+                        'stretch',
+                        childrenAlignmentLayoutAlign.split(' ')[1]
+                      )
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div pbFxLayout="row" pbFxLayoutAlign="center center">
+            <div pbFxSize="150px">
+              <h2 class="subtitle">Justify Content</h2>
+              <div class="control-group">
+                <label class="control control-radio">
+                  start
+                  <input
+                    type="radio"
+                    name="radio-justify"
+                    [checked]="
+                      childrenAlignmentLayoutAlign.split(' ')[1] === 'start'
+                    "
+                    (click)="
+                      changeLayoutAlignShow(
+                        childrenAlignmentLayoutAlign.split(' ')[0],
+                        'start'
+                      )
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  center
+                  <input
+                    type="radio"
+                    name="radio-justify"
+                    [checked]="
+                      childrenAlignmentLayoutAlign.split(' ')[1] === 'center'
+                    "
+                    (click)="
+                      changeLayoutAlignShow(
+                        childrenAlignmentLayoutAlign.split(' ')[0],
+                        'center'
+                      )
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  end
+                  <input
+                    type="radio"
+                    name="radio-justify"
+                    [checked]="
+                      childrenAlignmentLayoutAlign.split(' ')[1] === 'end'
+                    "
+                    (click)="
+                      changeLayoutAlignShow(
+                        childrenAlignmentLayoutAlign.split(' ')[0],
+                        'end'
+                      )
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  space-around
+                  <input
+                    type="radio"
+                    name="radio-justify"
+                    [checked]="
+                      childrenAlignmentLayoutAlign.split(' ')[1] ===
+                      'space-around'
+                    "
+                    (click)="
+                      changeLayoutAlignShow(
+                        childrenAlignmentLayoutAlign.split(' ')[0],
+                        'space-around'
+                      )
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  space-between
+                  <input
+                    type="radio"
+                    name="radio-justify"
+                    [checked]="
+                      childrenAlignmentLayoutAlign.split(' ')[1] ===
+                      'space-between'
+                    "
+                    (click)="
+                      changeLayoutAlignShow(
+                        childrenAlignmentLayoutAlign.split(' ')[0],
+                        'space-between'
+                      )
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  space-evenly
+                  <input
+                    type="radio"
+                    name="radio-justify"
+                    [checked]="
+                      childrenAlignmentLayoutAlign.split(' ')[1] ===
+                      'space-evenly'
+                    "
+                    (click)="
+                      changeLayoutAlignShow(
+                        childrenAlignmentLayoutAlign.split(' ')[0],
+                        'space-evenly'
+                      )
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end #layout -->
+
+  <section
+    id="screenBreakpoints"
+    pbFxLayout="column"
+    pbFxLayoutAlign="center start"
+  >
+    <div class="content" pbFxLayout="column" pbFxLayoutAlign="stretch start">
+      <h1
+        class="title"
+        [class.center]="isScreenXS || isScreenSM"
+        pbFxLayout.xs="column"
+        pbFxLayout.sm="column"
+        pbFxLayout.md="row"
+        pbFxLayout.lg="row"
+        pbFxLayout.xl="row"
+        pbFxLayoutAlign.xs="center center"
+        pbFxLayoutAlign.sm="center center"
+        pbFxLayoutAlign.md="start start"
+        pbFxLayoutAlign.lg="start start"
+        pbFxLayoutAlign.xl="start start"
+      >
+        <span class="center">List of available screen widths breakpoints</span>
+      </h1>
+
+      <div class="list" pbFxLayout="column" pbFxLayoutAlign="stretch center">
+        <div class="item" pbFxLayout="row" pbFxLayoutAlign="start start">
+          <div
+            class="cell"
+            pbFxSize="15%"
+            pbFxSize.xs="60px"
+            pbFxSize.sm="60px"
+          ></div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs="40px"
+            pbFxSize.sm="40px"
+          >
+            <h2 class="subtitle">
+              <span *ngIf="!isScreenXS && !isScreenSM">
+                Breakpoint {{ isScreenXS }}
+              </span>
+            </h2>
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs="110px"
+            pbFxSize.sm="110px"
+          >
+            <h2 class="subtitle">Size</h2>
+          </div>
+          <div class="cell" pbFxSize="28.3%" pbFxSize.xs pbFxSize.sm>
+            <h2 class="subtitle">Usage</h2>
+          </div>
+        </div>
+
+        <div class="item" pbFxLayout="row" pbFxLayoutAlign="stretch start">
+          <div
+            class="cell"
+            pbFxSize="15%"
+            pbFxSize.xs="60px"
+            pbFxSize.sm="60px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            <h3>Extra Small</h3>
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs="40px"
+            pbFxSize.sm="40px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            xs
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs="110px"
+            pbFxSize.sm="110px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            <div>Min: 0px</div>
+            <div>Max: 599px</div>
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs
+            pbFxSize.sm
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            pbFxLayout.xs
+          </div>
+        </div>
+
+        <div class="item" pbFxLayout="row" pbFxLayoutAlign="stretch start">
+          <div
+            class="cell"
+            pbFxSize="15%"
+            pbFxSize.xs="60px"
+            pbFxSize.sm="60px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            <h3>Small</h3>
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs="40px"
+            pbFxSize.sm="40px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            sm
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs="110px"
+            pbFxSize.sm="110px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            <div>Min: 600px</div>
+            <div>Max: 959px</div>
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs
+            pbFxSize.sm
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            pbFxLayout.sm
+          </div>
+        </div>
+
+        <div class="item" pbFxLayout="row" pbFxLayoutAlign="stretch start">
+          <div
+            class="cell"
+            pbFxSize="15%"
+            pbFxSize.xs="60px"
+            pbFxSize.sm="60px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            <h3>Medium</h3>
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs="40px"
+            pbFxSize.sm="40px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            md
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs="110px"
+            pbFxSize.sm="110px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            <div>Min: 960px</div>
+            <div>Max: 1279px</div>
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs
+            pbFxSize.sm
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            pbFxLayout.md
+          </div>
+        </div>
+
+        <div class="item" pbFxLayout="row" pbFxLayoutAlign="stretch start">
+          <div
+            class="cell"
+            pbFxSize="15%"
+            pbFxSize.xs="60px"
+            pbFxSize.sm="60px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            <h3>Large</h3>
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs="40px"
+            pbFxSize.sm="40px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            lg
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs="110px"
+            pbFxSize.sm="110px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            <div>Min: 1280px</div>
+            <div>Max: 1919px</div>
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs
+            pbFxSize.sm
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            pbFxLayout.lg
+          </div>
+        </div>
+
+        <div class="item" pbFxLayout="row" pbFxLayoutAlign="stretch start">
+          <div
+            class="cell"
+            pbFxSize="15%"
+            pbFxSize.xs="60px"
+            pbFxSize.sm="60px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            <h3>Extra Large</h3>
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs="40px"
+            pbFxSize.sm="40px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            xl
+          </div>
+          <div
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs="110px"
+            pbFxSize.sm="110px"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            <div>Min: 1920px</div>
+            <div>Max: -------</div>
+          </div>
+          <div
+            id="asdXX"
+            class="cell"
+            pbFxSize="28.3%"
+            pbFxSize.xs
+            pbFxSize.sm
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+          >
+            pbFxLayout.xl
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end #screenBreakpoints -->
+
+  <section id="itemSize" pbFxLayout="column" pbFxLayoutAlign="center start">
+    <div class="content" pbFxLayout="column" pbFxLayoutAlign="stretch start">
+      <h1
+        class="title"
+        [class.center]="isScreenXS || isScreenSM"
+        pbFxLayout.xs="column"
+        pbFxLayout.sm="column"
+        pbFxLayout.md="row"
+        pbFxLayout.lg="row"
+        pbFxLayout.xl="row"
+        pbFxLayoutAlign.xs="center start"
+        pbFxLayoutAlign.sm="center start"
+        pbFxLayoutAlign.md="start start"
+        pbFxLayoutAlign.lg="start start"
+        pbFxLayoutAlign.xl="start start"
+      >
+        <span>pbFxSize</span>
+        <span *ngIf="isScreenMD || isScreenLG || isScreenXL">
+          &nbsp;-&nbsp;
+        </span>
+        <span class="center">Set item size</span>
+      </h1>
+
+      <p
+        class="padding-bottom-20 padding-left-20 padding-right-20"
+        [class.center]="isScreenXS || isScreenSM"
+      >
+        You can use “px” (pixels) or “%” (percentage). When using "px", the size
+        of the item will be fixed, with the pixel size being informed, but when
+        using "%" the size of the item will be calculated based on the
+        percentage entered, this percentage refers to the total size of the
+        parent element. You can also use the attribute without any value, then
+        the size of the item will be equal to the space available in the parent
+        element.
+      </p>
+
+      <div
+        class="control-group margin-bottom-20"
+        pbFxLayout="row"
+        pbFxLayoutAlign="center center"
+        pbFxGap="30px"
+      >
+        <label class="control control-radio">
+          Column
+          <input
+            type="radio"
+            name="radio-item-size-showcase"
+            [checked]="itemsSizeShowDirection === 'column'"
+            (click)="changeItemsSizeShow('column')"
+          />
+          <div class="control-indicator"></div>
+        </label>
+
+        <label class="control control-radio">
+          Row
+          <input
+            type="radio"
+            name="radio-item-size-showcase"
+            [checked]="itemsSizeShowDirection === 'row'"
+            (click)="changeItemsSizeShow('row')"
+          />
+          <div class="control-indicator"></div>
+        </label>
+      </div>
+
+      <div
+        pbFxLayoutAlign="stretch start"
+        [pbFxLayout]="itemsSizeShowDirection === 'row' ? 'column' : 'row'"
+      >
+        <div
+          *ngIf="itemsSizeShowDirection === 'column'"
+          class="showcase column margin-bottom-10"
+          pbFxLayout="column"
+          pbFxLayoutAlign="stretch start"
+          [pbFxSize]="itemsSizeShowDirection === 'column' ? '50%' : ''"
+        >
+          <div
+            class="item"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+            [pbFxSize]="
+              itemsSizeItemType1 === 'fill'
+                ? ''
+                : itemsSizeItemSize1 + itemsSizeItemType1
+            "
+          >
+            <div *ngIf="itemsSizeItemType1 === 'fill'">
+              {{ itemsSizeItemType1 }}
+            </div>
+            <div *ngIf="itemsSizeItemType1 !== 'fill'">
+              pbFxSize="{{ itemsSizeItemSize1 | number : "1.0-0"
+              }}{{ itemsSizeItemType1 }}"
+            </div>
+          </div>
+
+          <div
+            class="item"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+            pbFxSize="100px"
+          >
+            <div *ngIf="itemsSizeItemType2 === 'fill'">
+              {{ itemsSizeItemType2 }}
+            </div>
+            <div *ngIf="itemsSizeItemType2 !== 'fill'">
+              pbFxSize="{{ itemsSizeItemSize2 | number : "1.0-0"
+              }}{{ itemsSizeItemType2 }}"
+            </div>
+          </div>
+
+          <div
+            class="item"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+            [pbFxSize]="
+              itemsSizeItemType3 === 'fill'
+                ? ''
+                : itemsSizeItemSize3 + itemsSizeItemType3
+            "
+          >
+            <div *ngIf="itemsSizeItemType3 === 'fill'">
+              {{ itemsSizeItemType3 }}
+            </div>
+            <div *ngIf="itemsSizeItemType3 !== 'fill'">
+              pbFxSize="{{ itemsSizeItemSize3 | number : "1.0-0"
+              }}{{ itemsSizeItemType3 }}"
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="itemsSizeShowDirection === 'row'"
+          class="showcase row margin-bottom-10"
+          pbFxLayout="row"
+          pbFxLayoutAlign="stretch start"
+        >
+          <div
+            class="item"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+            [pbFxSize]="
+              itemsSizeItemType1 === 'fill'
+                ? ''
+                : itemsSizeItemSize1 + itemsSizeItemType1
+            "
+          >
+            <div *ngIf="itemsSizeItemType1 === 'fill'">
+              {{ itemsSizeItemType1 }}
+            </div>
+            <div *ngIf="itemsSizeItemType1 !== 'fill'">
+              pbFxSize="{{ itemsSizeItemSize1 | number : "1.0-0"
+              }}{{ itemsSizeItemType1 }}"
+            </div>
+          </div>
+
+          <div
+            class="item"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+            [pbFxSize]="
+              itemsSizeItemType2 === 'fill'
+                ? ''
+                : itemsSizeItemSize2 + itemsSizeItemType2
+            "
+          >
+            <div *ngIf="itemsSizeItemType2 === 'fill'">
+              {{ itemsSizeItemType2 }}
+            </div>
+            <div *ngIf="itemsSizeItemType2 !== 'fill'">
+              pbFxSize="{{ itemsSizeItemSize2 | number : "1.0-0"
+              }}{{ itemsSizeItemType2 }}"
+            </div>
+          </div>
+
+          <div
+            class="item"
+            pbFxLayout="column"
+            pbFxLayoutAlign="center center"
+            [pbFxSize]="
+              itemsSizeItemType3 === 'fill'
+                ? ''
+                : itemsSizeItemSize3 + itemsSizeItemType3
+            "
+          >
+            <div *ngIf="itemsSizeItemType3 === 'fill'">
+              {{ itemsSizeItemType3 }}
+            </div>
+            <div *ngIf="itemsSizeItemType3 !== 'fill'">
+              pbFxSize="{{ itemsSizeItemSize3 | number : "1.0-0"
+              }}{{ itemsSizeItemType3 }}"
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="section-options"
+          pbFxLayout.xs="column"
+          pbFxLayout.sm="column"
+          pbFxLayoutAlign.xs="center start"
+          pbFxLayoutAlign.sm="center start"
+          pbFxGap.xs="20px"
+          pbFxGap.sm="20px"
+          [pbFxLayout.md]="itemsSizeShowDirection"
+          [pbFxLayout.lg]="itemsSizeShowDirection"
+          [pbFxLayout.xl]="itemsSizeShowDirection"
+          [pbFxLayoutAlign.md]="
+            itemsSizeShowDirection === 'row'
+              ? 'center space-evenly'
+              : 'center center'
+          "
+          [pbFxLayoutAlign.lg]="
+            itemsSizeShowDirection === 'row'
+              ? 'center space-evenly'
+              : 'center center'
+          "
+          [pbFxLayoutAlign.xl]="
+            itemsSizeShowDirection === 'row'
+              ? 'center space-evenly'
+              : 'center center'
+          "
+          [pbFxGap]="itemsSizeShowDirection === 'column' ? '20px' : null"
+          [pbFxSize]="itemsSizeShowDirection === 'column' ? '50%' : ''"
+        >
+          <div pbFxLayout="row" pbFxLayoutAlign="center center">
+            <div pbFxSize="100px">
+              <h2 class="subtitle">Item 1</h2>
+              <div class="control-group">
+                <label class="control control-radio">
+                  Percent
+                  <input
+                    type="radio"
+                    name="radio-item-size-1"
+                    [checked]="itemsSizeItemType1 === '%'"
+                    (click)="
+                      itemsSizeItemType1 = '%';
+                      changeItemsSizeShow(itemsSizeShowDirection)
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  Pixels
+                  <input
+                    type="radio"
+                    name="radio-item-size-1"
+                    [checked]="itemsSizeItemType1 === 'px'"
+                    (click)="
+                      itemsSizeItemType1 = 'px';
+                      changeItemsSizeShow(itemsSizeShowDirection)
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  Fill
+                  <input
+                    type="radio"
+                    name="radio-item-size-1"
+                    [checked]="itemsSizeItemType1 === 'fill'"
+                    (click)="
+                      itemsSizeItemType1 = 'fill';
+                      changeItemsSizeShow(itemsSizeShowDirection)
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div pbFxLayout="row" pbFxLayoutAlign="center center">
+            <div pbFxSize="100px">
+              <h2 class="subtitle">Item 2</h2>
+              <div class="control-group">
+                <label class="control control-radio">
+                  Percent
+                  <input
+                    type="radio"
+                    name="radio-item-size-2"
+                    [checked]="itemsSizeItemType2 === '%'"
+                    (click)="
+                      itemsSizeItemType2 = '%';
+                      changeItemsSizeShow(itemsSizeShowDirection)
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  Pixels
+                  <input
+                    type="radio"
+                    name="radio-item-size-2"
+                    [checked]="itemsSizeItemType2 === 'px'"
+                    (click)="
+                      itemsSizeItemType2 = 'px';
+                      changeItemsSizeShow(itemsSizeShowDirection)
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  Fill
+                  <input
+                    type="radio"
+                    name="radio-item-size-2"
+                    [checked]="itemsSizeItemType2 === 'fill'"
+                    (click)="
+                      itemsSizeItemType2 = 'fill';
+                      changeItemsSizeShow(itemsSizeShowDirection)
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div pbFxLayout="row" pbFxLayoutAlign="center center">
+            <div pbFxSize="100px">
+              <h2 class="subtitle">Item 3</h2>
+              <div class="control-group">
+                <label class="control control-radio">
+                  Percent
+                  <input
+                    type="radio"
+                    name="radio-item-size-3"
+                    [checked]="itemsSizeItemType3 === '%'"
+                    (click)="
+                      itemsSizeItemType3 = '%';
+                      changeItemsSizeShow(itemsSizeShowDirection)
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  Pixels
+                  <input
+                    type="radio"
+                    name="radio-item-size-3"
+                    [checked]="itemsSizeItemType3 === 'px'"
+                    (click)="
+                      itemsSizeItemType3 = 'px';
+                      changeItemsSizeShow(itemsSizeShowDirection)
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+
+                <label class="control control-radio">
+                  Fill
+                  <input
+                    type="radio"
+                    name="radio-item-size-3"
+                    [checked]="itemsSizeItemType3 === 'fill'"
+                    (click)="
+                      itemsSizeItemType3 = 'fill';
+                      changeItemsSizeShow(itemsSizeShowDirection)
+                    "
+                  />
+                  <div class="control-indicator"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end #itemSize -->
+
+  <section id="childrenGap" pbFxLayout="column" pbFxLayoutAlign="center start">
+    <div class="content" pbFxLayout="column" pbFxLayoutAlign="stretch start">
+      <h1
+        class="title"
+        [class.center]="isScreenXS || isScreenSM"
+        pbFxLayout.xs="column"
+        pbFxLayout.sm="column"
+        pbFxLayout.md="row"
+        pbFxLayout.lg="row"
+        pbFxLayout.xl="row"
+        pbFxLayoutAlign.xs="center start"
+        pbFxLayoutAlign.sm="center start"
+        pbFxLayoutAlign.md="start start"
+        pbFxLayoutAlign.lg="start start"
+        pbFxLayoutAlign.xl="start start"
+      >
+        <span>pbFxGap</span>
+        <span *ngIf="isScreenMD || isScreenLG || isScreenXL">
+          &nbsp;-&nbsp;
+        </span>
+        <span class="center">Set the gap between items (children)</span>
+      </h1>
+
+      <p
+        class="padding-bottom-20 padding-left-20 padding-right-20"
+        [class.center]="isScreenXS || isScreenSM"
+      >
+        You can use "px" (pixels) or "%" (percentage). When using "px", the gap
+        between the items will be fixed, with the pixel size informed, but when
+        using "%" the gap size will be calculated based on the percentage
+        entered, this percentage refers to the total size of the parent element.
+      </p>
+
+      <div
+        class="control-group margin-bottom-20"
+        pbFxLayout="row"
+        pbFxLayoutAlign="center center"
+        pbFxGap="30px"
+      >
+        <label class="control control-radio">
+          Column
+          <input
+            type="radio"
+            name="radio-children-gap-showcase"
+            [checked]="childrenGapShowLayout === 'column'"
+            (click)="childrenGapShowLayout = 'column'"
+          />
+          <div class="control-indicator"></div>
+        </label>
+
+        <label class="control control-radio">
+          Row
+          <input
+            type="radio"
+            name="radio-children-gap-showcase"
+            [checked]="childrenGapShowLayout === 'row'"
+            (click)="childrenGapShowLayout = 'row'"
+          />
+          <div class="control-indicator"></div>
+        </label>
+      </div>
+
+      <div
+        *ngIf="childrenGapShowLayout === 'column'"
+        class="showcase margin-bottom-10"
+        pbFxLayout="column"
+        pbFxLayoutAlign="stretch center"
+        pbFxSize="200px"
+        [class]="childrenGapShowLayout"
+        pbFxGap="10px"
+      >
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize
+        >
+          1
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize
+        >
+          2
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize
+        >
+          3
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize
+        >
+          4
+        </div>
+      </div>
+
+      <div
+        *ngIf="childrenGapShowLayout === 'row'"
+        class="showcase margin-bottom-10"
+        pbFxLayout="row"
+        pbFxLayoutAlign="stretch center"
+        pbFxGap="10px"
+        pbFxSize="200px"
+        [class]="childrenGapShowLayout"
+      >
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize
+        >
+          1
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize
+        >
+          2
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize
+        >
+          3
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize
+        >
+          4
+        </div>
+      </div>
+
+      <div
+        class="code margin-bottom-20"
+        pbFxLayout.xs="column"
+        pbFxLayout.sm="column"
+        pbFxLayout.md="row"
+        pbFxLayout.lg="row"
+        pbFxLayout.xl="row"
+        pbFxLayoutAlign="center center"
+        pbFxGap.xs="0"
+        pbFxGap.sm="0"
+        pbFxGap.md="30px"
+        pbFxGap.lg="30px"
+        pbFxGap.xl="30px"
+      >
+        <span>pbFxLayout="{{ childrenGapShowLayout }}"</span>
+        <span>pbFxLayoutAlign="stretch center"</span>
+        <span>pbFxGap="10px"</span>
+      </div>
+    </div>
+  </section>
+  <!-- end #childrenGap -->
+
+  <section id="itemOrder" pbFxLayout="column" pbFxLayoutAlign="center start">
+    <div class="content" pbFxLayout="column" pbFxLayoutAlign="stretch start">
+      <h1
+        class="title"
+        [class.center]="isScreenXS || isScreenSM"
+        pbFxLayout.xs="column"
+        pbFxLayout.sm="column"
+        pbFxLayout.md="row"
+        pbFxLayout.lg="row"
+        pbFxLayout.xl="row"
+        pbFxLayoutAlign.xs="center start"
+        pbFxLayoutAlign.sm="center start"
+        pbFxLayoutAlign.md="start start"
+        pbFxLayoutAlign.lg="start start"
+        pbFxLayoutAlign.xl="start start"
+      >
+        <span>pbFxOrder</span>
+        <span *ngIf="isScreenMD || isScreenLG || isScreenXL">
+          &nbsp;-&nbsp;
+        </span>
+        <span class="center">Use to set rendem order for each item</span>
+      </h1>
+
+      <div
+        class="showcase"
+        pbFxLayout="row"
+        pbFxLayout.xs="column"
+        pbFxLayout.sm="column"
+        pbFxLayoutAlign="stretch center"
+        pbFxSize="200px"
+      >
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxOrder="3"
+          pbFxSize
+        >
+          1 (pbFxOrder="3")
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxOrder="4"
+          pbFxSize
+        >
+          2 (pbFxOrder="4")
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxOrder="2"
+          pbFxSize
+        >
+          3 (pbFxOrder="2")
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxOrder="1"
+          pbFxSize
+        >
+          4 (pbFxOrder="1")
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end #itemOrder -->
+
+  <section id="itemOffset" pbFxLayout="column" pbFxLayoutAlign="center start">
+    <div class="content" pbFxLayout="column" pbFxLayoutAlign="stretch start">
+      <h1
+        class="title"
+        [class.center]="isScreenXS || isScreenSM"
+        pbFxLayout.xs="column"
+        pbFxLayout.sm="column"
+        pbFxLayout.md="row"
+        pbFxLayout.lg="row"
+        pbFxLayout.xl="row"
+        pbFxLayoutAlign.xs="center start"
+        pbFxLayoutAlign.sm="center start"
+        pbFxLayoutAlign.md="start start"
+        pbFxLayoutAlign.lg="start start"
+        pbFxLayoutAlign.xl="start start"
+      >
+        <span>pbFxOffset</span>
+        <span *ngIf="isScreenMD || isScreenLG || isScreenXL">
+          &nbsp;-&nbsp;
+        </span>
+        <span>Set item offset</span>
+      </h1>
+
+      <div
+        class="control-group margin-bottom-20"
+        pbFxLayout="row"
+        pbFxLayoutAlign="center center"
+        pbFxGap="30px"
+      >
+        <label class="control control-radio">
+          Column
+          <input
+            type="radio"
+            name="radio-item-offset-showcase"
+            [checked]="itemsOffsetShowDirection === 'column'"
+            (click)="itemsOffsetShowDirection = 'column'"
+          />
+          <div class="control-indicator"></div>
+        </label>
+
+        <label class="control control-radio">
+          Row
+          <input
+            type="radio"
+            name="radio-item-offset-showcase"
+            [checked]="itemsOffsetShowDirection === 'row'"
+            (click)="itemsOffsetShowDirection = 'row'"
+          />
+          <div class="control-indicator"></div>
+        </label>
+      </div>
+
+      <div
+        *ngIf="itemsOffsetShowDirection === 'column'"
+        class="column showcase margin-bottom-10"
+        pbFxLayout="column"
+        pbFxLayoutAlign="stretch start"
+        pbFxSize="400px"
+      >
+        <div
+          class="item"
+          pbFxLayout="column"
+          pbFxLayoutAlign="center center"
+          pbFxSize="100px"
+          pbFxOffset="50px"
+        >
+          <div>pbFxSize="100px"</div>
+          <div>pbFxOffset="50px"</div>
+        </div>
+
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize
+        >
+          <div>pbFxSize</div>
+        </div>
+
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize="15%"
+        >
+          <div>pbFxSize="15%"</div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="itemsOffsetShowDirection === 'row'"
+        class="showcase row"
+        pbFxLayout="row"
+        pbFxLayoutAlign="stretch start"
+        pbFxSize="190px"
+      >
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize="300px"
+          pbFxSize.xs="50px"
+          pbFxSize.sm="50px"
+          pbFxOffset="200px"
+          pbFxOffset.xs="50px"
+          pbFxOffset.xs="50px"
+        >
+          <div pbFxLayout="column" pbFxLayoutAlign="center center">
+            <div *ngIf="isScreenXS || isScreenSM">pbFxSize="50px"</div>
+            <div *ngIf="isScreenXS || isScreenSM">pbFxOffset="50px"</div>
+            <div *ngIf="!isScreenXS && !isScreenSM">pbFxSize="300px"</div>
+            <div *ngIf="!isScreenXS && !isScreenSM">pbFxOffset="200px"</div>
+          </div>
+        </div>
+
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize
+        >
+          <div>pbFxSize</div>
+        </div>
+
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxSize="15%"
+        >
+          <div>pbFxSize="15%"</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end #itemOffset -->
+</div>
+
+<div id="made-by" pbFxLayout="row" pbFxLayoutAlign="center end" pbFxGap="5px">
+  <div>
+    <a href="https://philipi.bovo.me" target="_blank">
+      Developed by Philipi Bovo&nbsp;
+    </a>
+  </div>
+
+  <div>
+    <a
+      aria-label="Logo Philipi Bovo Developer"
+      alt="Logo Philipi Bovo Developer"
+      href="https://philipi.bovo.me"
+      target="_blank"
+    >
+      <img src="./assets/philipi-bovo-logo-white.svg" />
+    </a>
+  </div>
+</div>
+<!-- end #made-by -->
