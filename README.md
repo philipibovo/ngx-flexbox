@@ -1,27 +1,60 @@
-# NgxFlexboxLib
+<p align="center">
+  <img src="https://ngx-flexbox.web.app/assets/logo-ngx-flexbox-readme.png" alt="Logo ngx flexbox" />
+</p>
+<br>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.2.
+# ngx-flexbox
 
-## Development server
+ngx-flexbox provides an easy layout API using Flexbox CSS. This module provides Angular developers with component layout features using a custom Layout API, mediaQuery observables, and injected DOM flexbox-2016 CSS stylings.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This lib was created as an alternative to @angular/flexlayout, and was heavily inspired by it.
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Getting Started
 
-## Build
+Start by installing the Angular Layout library from [npm](https://www.npmjs.com/package/@philipibovo/ngx-flexbox)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+`npm install -save @philipibovo/ngx-flexbox`
 
-## Running unit tests
+Next, you'll need to import the ngx-flexbox module in your app's module.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**app.module.ts**
 
-## Running end-to-end tests
+```ts
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+import { NgxFlexboxModule } from '@philipibovo/ngx-flexbox';
+...
 
-## Further help
+@NgModule({
+    ...
+    imports: [ NgxFlexboxModule ],
+    ...
+});
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+After that is configured, you can use the ngx-flexbox attributes in your HTML tags for ngx-flexbox:
+
+```html
+<div pbFxLayout="row" pbFxLayoutAlign="start space-between"></div>
+```
+
+Check out [all of the available options](https://ngx-flexbox.web.app/) for using ngx-flexbox in your application.
+
+---
+
+### Browser Support
+
+&nbsp;
+<a href="http://caniuse.com/#feat=flexbox" target="_blank">
+![caniuseflexbox](https://cloud.githubusercontent.com/assets/210413/21288118/917e3faa-c440-11e6-9b08-28aff590c7ae.png)
+</a>
+
+---
+
+### License
+
+The sources for this package are in the [ngx-flexbox](https://ngx-flexbox.web.app/) repository. <br/>
+Please file issues and pull requests against that repo.
+
+License: MIT

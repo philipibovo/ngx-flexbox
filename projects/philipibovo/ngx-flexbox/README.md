@@ -39,7 +39,7 @@ After that is configured, you can use the ngx-flexbox attributes in your HTML ta
 <div pbFxLayout="row" pbFxLayoutAlign="start space-between"></div>
 ```
 
-Check out [all of the available options](https://philipi.bovo.me/ngx-flexbox) for using ngx-flexbox in your application.
+Check out [all of the available options](https://ngx-flexbox.web.app/) for using ngx-flexbox in your application.
 
 ---
 
@@ -54,7 +54,7 @@ Check out [all of the available options](https://philipi.bovo.me/ngx-flexbox) fo
 
 ### License
 
-The sources for this package are in the [ngx-flexbox](https://github.com/philipibovo/ngx-flexbox) repository. <br/>
+The sources for this package are in the [ngx-flexbox](https://ngx-flexbox.web.app/) repository. <br/>
 Please file issues and pull requests against that repo.
 
 License: MIT
