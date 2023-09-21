@@ -1,6 +1,6 @@
 {
   "name": "@philipibovo/ngx-flexbox",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "ngx-flexbox provides an easy layout API using Flexbox CSS, this lib was created as an alternative to @angular/flexlayout",
   "main": "index.js",
   "repository": {
@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/philipibovo/ngx-flexbox/issues"
   },
-  "homepage": "https://philipi.bovo.me/ngx-flexbox",
+  "homepage": "https://ngx-flexbox.web.app",
   "peerDependencies": {
     "@angular/common": "^16.2.0",
     "@angular/core": "^16.2.0"
