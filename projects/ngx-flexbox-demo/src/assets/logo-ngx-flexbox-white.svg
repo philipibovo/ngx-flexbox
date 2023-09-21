@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="211.66667mm"
+   height="166.22006mm"
+   viewBox="0 0 211.66667 166.22006"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   sodipodi:docname="logo-ngx-flexbox-white.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.20300747"
+     inkscape:cx="-278.31488"
+     inkscape:cy="1376.7966"
+     inkscape:window-width="2560"
+     inkscape:window-height="1027"
+     inkscape:window-x="1440"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showguides="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1052"
+       originx="-349.83333"
+       originy="200.50001" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient2143"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop2141" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-349.83333,200.5)">
+    <rect
+       style="fill:#fffff8;fill-opacity:0;stroke:#ffffff;stroke-width:7.15695;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.5;paint-order:stroke markers fill"
+       id="rect3929"
+       width="136.33983"
+       height="159.06311"
+       x="387.49677"
+       y="-196.92152" />
+    <rect
+       style="fill:#fffff8;fill-opacity:0;stroke:#ffffff;stroke-width:7.15695;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.5;paint-order:stroke markers fill"
+       id="rect3935"
+       width="159.06313"
+       height="136.33981"
+       x="376.1351"
+       y="-185.55988" />
+    <rect
+       style="fill:#fffff8;fill-opacity:0;stroke:#ffffff;stroke-width:7.15695;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.5;paint-order:stroke markers fill"
+       id="rect3943"
+       width="181.78642"
+       height="113.61651"
+       x="364.77347"
+       y="-174.19823" />
+    <rect
+       style="fill:#fffff8;fill-opacity:0;stroke:#ffffff;stroke-width:7.15695;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.5;paint-order:stroke markers fill"
+       id="rect4011"
+       width="204.50972"
+       height="90.893211"
+       x="353.4118"
+       y="-162.83658" />
+    <text
+       xml:space="preserve"
+       style="font-size:22.0921px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:0.5;stroke:#4d4d4d;stroke-width:0.0946803;stroke-opacity:0.5"
+       x="391.09811"
+       y="-76.999992"
+       id="text6609"><tspan
+         sodipodi:role="line"
+         id="tspan6607"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.0921px;font-family:'PT Sans Caption';-inkscape-font-specification:'PT Sans Caption Bold';fill:#ffffff;fill-opacity:0.5;stroke:#4d4d4d;stroke-width:0.0946803;stroke-opacity:0.5"
+         x="391.09811"
+         y="-76.999992">ngx-flexbox</tspan></text>
+  </g>
+</svg>
