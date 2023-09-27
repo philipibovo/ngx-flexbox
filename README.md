@@ -17,9 +17,9 @@ Start by installing the Angular Layout library from [npm](https://www.npmjs.com/
 
 `npm install -save @philipibovo/ngx-flexbox`
 
-Next, you'll need to import the ngx-flexbox module in your app's module.
+Next, you'll need to import the ngx-flexbox module in your module.
 
-**app.module.ts**
+**my-module.module.ts**
 
 ```ts
 

@@ -198,6 +198,7 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
 
   setItemSize(): void {
     this._renderer2.setStyle(this._currentElement, `flex`, `none`);
+    this._renderer2.setStyle(this._currentElement, `max-width`, ``);
 
     if (this._isFill) {
       this._renderer2.setStyle(this._currentElement, `flex`, `1 auto`);
@@ -206,6 +207,12 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
         this._currentElement,
         `flex`,
         `0 ${this._size}${this._unitType}`
+      );
+
+      this._renderer2.setStyle(
+        this._currentElement,
+        `max-width`,
+        `${this._size}${this._unitType}`
       );
     }
   }
