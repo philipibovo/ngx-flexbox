@@ -7,4 +7,5 @@ export * from './lib/pb-flex-layout/pb-flex-layout.directive';
 export * from './lib/pb-flex-offset/pb-flex-offset.directive';
 export * from './lib/pb-flex-order/pb-flex-order.directive';
 export * from './lib/pb-flex-size/pb-flex-size.directive';
+export * from './lib/pb-flex-wrap/pb-flex-wrap.directive';
 export * from './lib/ngx-flexbox.module';

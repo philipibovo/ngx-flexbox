@@ -64,43 +64,61 @@ export class PbFlexOrderDirective implements OnChanges, OnInit {
 
     switch (true) {
       case widthSize >= 0 && widthSize <= 599:
+        if (!this.pbfxItemOrder && !this.pbfxItemOrderXS) {
+          return;
+        }
+
         this.pbfxItemOrder = this.pbfxItemOrderXS
           ? this.pbfxItemOrderXS
           : this.pbfxItemOrder;
         break;
 
       case widthSize >= 600 && widthSize <= 959:
+        if (!this.pbfxItemOrder && !this.pbfxItemOrderSM) {
+          return;
+        }
+
         this.pbfxItemOrder = this.pbfxItemOrderSM
           ? this.pbfxItemOrderSM
           : this.pbfxItemOrder;
         break;
 
       case widthSize >= 960 && widthSize <= 1279:
+        if (!this.pbfxItemOrder && !this.pbfxItemOrderMD) {
+          return;
+        }
+
         this.pbfxItemOrder = this.pbfxItemOrderMD
           ? this.pbfxItemOrderMD
           : this.pbfxItemOrder;
         break;
 
       case widthSize >= 1280 && widthSize <= 1919:
+        if (!this.pbfxItemOrder && !this.pbfxItemOrderLG) {
+          return;
+        }
+
         this.pbfxItemOrder = this.pbfxItemOrderLG
           ? this.pbfxItemOrderLG
           : this.pbfxItemOrder;
         break;
 
       case widthSize >= 1920:
+        if (!this.pbfxItemOrder && !this.pbfxItemOrderXL) {
+          return;
+        }
+
         this.pbfxItemOrder = this.pbfxItemOrderXL
           ? this.pbfxItemOrderXL
           : this.pbfxItemOrder;
         break;
     }
 
-    if (this.pbfxItemOrder) {
-      this._order = parseInt(this.pbfxItemOrder.replace(/[^\d.-]+/g, ''));
+    this._order = parseInt(this.pbfxItemOrder!.replace(/[^\d.-]+/g, ''));
 
-      setTimeout(() => {
-        this.setItemOrder();
-      }, 0);
-    }
+    setTimeout(() => {
+      this.setItemOrder();
+    }, 0);
   }
   // end setScreenType(): void
 

@@ -767,13 +767,13 @@
         class="padding-bottom-20 padding-left-20 padding-right-20"
         [class.center]="isScreenXS || isScreenSM"
       >
-        You can use “px” (pixels) or “%” (percentage). When using "px", the size
-        of the item will be fixed, with the pixel size being informed, but when
-        using "%" the size of the item will be calculated based on the
-        percentage entered, this percentage refers to the total size of the
-        parent element. You can also use the attribute without any value, then
-        the size of the item will be equal to the space available in the parent
-        element.
+        You can use “px” (pixels) “%” (percentage), or CSS calc() function. When
+        using "px", the size of the item will be fixed, with the pixel size
+        being informed, but when using "%" the size of the item will be
+        calculated based on the percentage entered, this percentage refers to
+        the total size of the parent element. You can also use the attribute
+        without any value, then the size of the item will be equal to the space
+        available in the parent element.
       </p>
 
       <div
@@ -1149,10 +1149,11 @@
         class="padding-bottom-20 padding-left-20 padding-right-20"
         [class.center]="isScreenXS || isScreenSM"
       >
-        You can use "px" (pixels) or "%" (percentage). When using "px", the gap
-        between the items will be fixed, with the pixel size informed, but when
-        using "%" the gap size will be calculated based on the percentage
-        entered, this percentage refers to the total size of the parent element.
+        You can use "px" (pixels), "%" (percentage) or CSS calc() function. When
+        using "px", the gap between the items will be fixed, with the pixel size
+        informed, but when using "%" the gap size will be calculated based on
+        the percentage entered, this percentage refers to the total size of the
+        parent element.
       </p>
 
       <div
@@ -1390,6 +1391,13 @@
         <span>Set item offset</span>
       </h1>
 
+      <p
+        class="padding-bottom-20 padding-left-20 padding-right-20"
+        [class.center]="isScreenXS || isScreenSM"
+      >
+        You can use "px" (pixels), "%" (percentage) or CSS calc() function.
+      </p>
+
       <div
         class="control-group margin-bottom-20"
         pbFxLayout="row"
@@ -1503,6 +1511,122 @@
     </div>
   </section>
   <!-- end #itemOffset -->
+
+  <section id="childrenWrap" pbFxLayout="column" pbFxLayoutAlign="center start">
+    <div class="content" pbFxLayout="column" pbFxLayoutAlign="stretch start">
+      <h1
+        class="title"
+        [class.center]="isScreenXS || isScreenSM"
+        pbFxLayout.xs="column"
+        pbFxLayout.sm="column"
+        pbFxLayout.md="row"
+        pbFxLayout.lg="row"
+        pbFxLayout.xl="row"
+        pbFxLayoutAlign.xs="center start"
+        pbFxLayoutAlign.sm="center start"
+        pbFxLayoutAlign.md="start start"
+        pbFxLayoutAlign.lg="start start"
+        pbFxLayoutAlign.xl="start start"
+      >
+        <span>pbFxWrap</span>
+        <span *ngIf="isScreenMD || isScreenLG || isScreenXL">
+          &nbsp;-&nbsp;
+        </span>
+        <span class="center">Use to set flex-wrap</span>
+      </h1>
+
+      <p
+        class="padding-bottom-20 padding-left-20 padding-right-20"
+        [class.center]="isScreenXS || isScreenSM"
+      >
+        You can use "nowrap", "wrap" or "wrap-reverse".
+      </p>
+
+      <div
+        class="showcase"
+        pbFxLayout="row"
+        pbFxLayout.xs="column"
+        pbFxLayout.sm="column"
+        pbFxLayoutAlign="start center"
+        pbFxSize="200px"
+        pbFxWrap="wrap"
+      >
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxOrder="1"
+          pbFxSize="25%"
+        >
+          1
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxOrder="2"
+          pbFxSize="25%"
+        >
+          2
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxOrder="3"
+          pbFxSize="25%"
+        >
+          3
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxOrder="4"
+          pbFxSize="25%"
+        >
+          4
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxOrder="5"
+          pbFxSize="25%"
+        >
+          5
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxOrder="6"
+          pbFxSize="25%"
+        >
+          6
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxOrder="7"
+          pbFxSize="25%"
+        >
+          7
+        </div>
+        <div
+          class="item"
+          pbFxLayout="row"
+          pbFxLayoutAlign="center center"
+          pbFxOrder="8"
+          pbFxSize="25%"
+        >
+          8
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end #childrenWrap -->
 </div>
 
 <div id="made-by" pbFxLayout="row" pbFxLayoutAlign="center end" pbFxGap="5px">

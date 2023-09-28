@@ -296,6 +296,47 @@ input[type="number"] {
   }
 }
 
+#childrenWrap {
+  > .content {
+    > .showcase {
+      > .item {
+        color: rgba(255, 255, 255, 1);
+        font-size: 1.1rem;
+        font-weight: bold;
+        height: 100px;
+        min-width: 50px;
+        &:nth-child(1) {
+          background-color: rgba(242, 180, 46, 1);
+          color: #333;
+        }
+        &:nth-child(2) {
+          background-color: rgb(113, 113, 113);
+        }
+        &:nth-child(3) {
+          background-color: rgba(211, 41, 41, 1);
+        }
+        &:nth-child(4) {
+          background-color: rgba(147, 230, 78, 1);
+          color: #333;
+        }
+        &:nth-child(5) {
+          background-color: rgba(34, 34, 34, 1);
+        }
+        &:nth-child(6) {
+          background-color: rgba(149, 0, 255, 1);
+        }
+        &:nth-child(7) {
+          background-color: rgba(107, 191, 255, 1);
+          color: #333;
+        }
+        &:nth-child(8) {
+          background-color: rgba(247, 0, 177, 1);
+        }
+      }
+    }
+  }
+}
+
 #logo {
   background-image: linear-gradient(
     to right top,

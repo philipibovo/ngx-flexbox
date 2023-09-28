@@ -6,6 +6,7 @@ import { PbFlexLayoutDirective } from './pb-flex-layout/pb-flex-layout.directive
 import { PbFlexOffsetDirective } from './pb-flex-offset/pb-flex-offset.directive';
 import { PbFlexOrderDirective } from './pb-flex-order/pb-flex-order.directive';
 import { PbFlexSizeDirective } from './pb-flex-size/pb-flex-size.directive';
+import { PbFlexWrapDirective } from './pb-flex-wrap/pb-flex-wrap.directive';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { PbFlexSizeDirective } from './pb-flex-size/pb-flex-size.directive';
     PbFlexOffsetDirective,
     PbFlexOrderDirective,
     PbFlexSizeDirective,
+    PbFlexWrapDirective,
   ],
   imports: [],
   exports: [
@@ -22,6 +24,7 @@ import { PbFlexSizeDirective } from './pb-flex-size/pb-flex-size.directive';
     PbFlexOffsetDirective,
     PbFlexOrderDirective,
     PbFlexSizeDirective,
+    PbFlexWrapDirective,
   ],
 })
 export class NgxFlexboxModule {}
