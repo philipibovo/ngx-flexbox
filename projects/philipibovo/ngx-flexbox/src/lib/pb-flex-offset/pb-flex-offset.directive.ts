@@ -5,6 +5,7 @@ import {
   Input,
   OnChanges,
   Renderer2,
+  RendererStyleFlags2,
 } from '@angular/core';
 
 const inputs = [
@@ -34,8 +35,6 @@ export class PbFlexOffsetDirective implements OnChanges {
   @Input(`pbFxOffset.xl`) public pbfxItemOffsetXL: string | null = ``;
   private _currentElement: any;
   private _directiveContent: string = ``;
-  private _size: number = 0;
-  private _unitType: string = ``;
 
   constructor(private _elementRef: ElementRef, private _renderer2: Renderer2) {}
 
@@ -62,9 +61,9 @@ export class PbFlexOffsetDirective implements OnChanges {
           return;
         }
 
-        this.pbfxItemOffset = this.pbfxItemOffsetXS
+        this._directiveContent = this.pbfxItemOffsetXS
           ? this.pbfxItemOffsetXS
-          : this.pbfxItemOffset;
+          : this.pbfxItemOffset!;
         break;
 
       case widthSize >= 600 && widthSize <= 959:
@@ -72,9 +71,9 @@ export class PbFlexOffsetDirective implements OnChanges {
           return;
         }
 
-        this.pbfxItemOffset = this.pbfxItemOffsetSM
+        this._directiveContent = this.pbfxItemOffsetSM
           ? this.pbfxItemOffsetSM
-          : this.pbfxItemOffset;
+          : this.pbfxItemOffset!;
         break;
 
       case widthSize >= 960 && widthSize <= 1279:
@@ -82,9 +81,9 @@ export class PbFlexOffsetDirective implements OnChanges {
           return;
         }
 
-        this.pbfxItemOffset = this.pbfxItemOffsetMD
+        this._directiveContent = this.pbfxItemOffsetMD
           ? this.pbfxItemOffsetMD
-          : this.pbfxItemOffset;
+          : this.pbfxItemOffset!;
         break;
 
       case widthSize >= 1280 && widthSize <= 1919:
@@ -92,9 +91,9 @@ export class PbFlexOffsetDirective implements OnChanges {
           return;
         }
 
-        this.pbfxItemOffset = this.pbfxItemOffsetLG
+        this._directiveContent = this.pbfxItemOffsetLG
           ? this.pbfxItemOffsetLG
-          : this.pbfxItemOffset;
+          : this.pbfxItemOffset!;
         break;
 
       case widthSize >= 1920:
@@ -102,18 +101,19 @@ export class PbFlexOffsetDirective implements OnChanges {
           return;
         }
 
-        this.pbfxItemOffset = this.pbfxItemOffsetXL
+        this._directiveContent = this.pbfxItemOffsetXL
           ? this.pbfxItemOffsetXL
-          : this.pbfxItemOffset;
+          : this.pbfxItemOffset!;
         break;
     }
 
-    if (this.pbfxItemOffset!.search(/calc/i) >= 0) {
-      this._directiveContent = this.pbfxItemOffset!;
-      this._unitType = `calc`;
-    } else {
-      this._size = parseInt(this.pbfxItemOffset!.replace(/[^\d.-]+/g, ''));
-      this._unitType = this.pbfxItemOffset!.search(/px/i) > 0 ? `px` : `%`;
+    if (
+      this._directiveContent.search(/calc/i) === -1 &&
+      !this._directiveContent.match(
+        /ch|cn|em|in|mm|pc|px|pt|rem|vh|vmax|vm|vmin|vw|x|%/g
+      )
+    ) {
+      this._directiveContent += `%`;
     }
 
     this.setItemOffset();
@@ -121,19 +121,12 @@ export class PbFlexOffsetDirective implements OnChanges {
   // end setScreenType(): void
 
   setItemOffset(): void {
+    const flags = RendererStyleFlags2.DashCase | RendererStyleFlags2.Important;
     const parentDirection: string = window.getComputedStyle(
       this._currentElement.parentNode
     ).flexDirection
       ? window.getComputedStyle(this._currentElement.parentNode).flexDirection
       : `row`;
-
-    let finalCssValue: string = ``;
-
-    if (this._unitType === `calc`) {
-      finalCssValue = this._directiveContent;
-    } else {
-      finalCssValue = `${this._size}${this._unitType}`;
-    }
 
     if (parentDirection === `column`) {
       this._renderer2.removeStyle(this._currentElement, `margin-top`);
@@ -141,7 +134,8 @@ export class PbFlexOffsetDirective implements OnChanges {
       this._renderer2.setStyle(
         this._currentElement,
         `margin-top`,
-        finalCssValue
+        this._directiveContent,
+        flags
       );
     } else {
       this._renderer2.removeStyle(this._currentElement, `margin-left`);
@@ -149,258 +143,10 @@ export class PbFlexOffsetDirective implements OnChanges {
       this._renderer2.setStyle(
         this._currentElement,
         `margin-left`,
-        finalCssValue
+        this._directiveContent,
+        flags
       );
     }
-
-    return;
-
-    // if (parentDirection === `column`) {
-    //   parentTotalSize = parseInt(
-    //     window.getComputedStyle(this._currentElement.parentNode).height
-    //   );
-
-    //   setTimeout(() => {
-    //     currentItemNewSize =
-    //       parseInt(
-    //         window
-    //           .getComputedStyle(this._currentElement)
-    //           .height.replace(/[^\d.-]+/g, '')
-    //       ) + parseInt(this.pbfxItemOffset!);
-    //   }, 0);
-
-    //   this._renderer2.setStyle(
-    //     this._currentElement,
-    //     `margin-top`,
-    //     `${this.pbfxItemOffset}${this._unitType}`
-    //   );
-
-    //   setTimeout(() => {
-    //     this._renderer2.setStyle(
-    //       this._currentElement,
-    //       `min-height`,
-    //       `${currentItemNewSize}px`
-    //     );
-    //   }, 1);
-
-    //   // Adjust size sibilings %
-    //   setTimeout(() => {
-    //     this._currentElement.parentNode.childNodes.forEach((child: any) => {
-    //       for (let i = 0; i < child.attributes.length; i++) {
-    //         if (
-    //           child.attributes[i].nodeName.search(`pbfx-item-size`) >= 0 &&
-    //           child.attributes[i].nodeValue.search(/%/i) > 0
-    //         ) {
-    //           this._renderer2.setStyle(
-    //             child,
-    //             `min-height`,
-    //             `${
-    //               (parentTotalSize / 100) *
-    //               parseInt(
-    //                 child.attributes[i].nodeValue.replace(/[^0-9\\.]+/g, '')
-    //               )
-    //             }px`
-    //           );
-    //         }
-    //       }
-    //     });
-    //   }, 1);
-
-    //   // Adjust size sibilings fill
-    //   setTimeout(() => {
-    //     let isFillSize: boolean = false;
-    //     let marginsTotalSize: number = 0;
-    //     let qtdParentChildrenFill: number = 0;
-    //     let siblingsNoFillTotalSize: number = 0;
-    //     this._currentElement.parentNode.childNodes.forEach((child: any) => {
-    //       isFillSize = false;
-
-    //       for (let i = 0; i < child.attributes.length; i++) {
-    //         if (
-    //           child.attributes[i].nodeName.search(`pbfx-item-size`) >= 0 &&
-    //           (child.attributes[i].nodeValue === `fill` ||
-    //             child.attributes[i].nodeValue === ``)
-    //         ) {
-    //           isFillSize = true;
-
-    //           marginsTotalSize =
-    //             marginsTotalSize +
-    //             parseInt(
-    //               window
-    //                 .getComputedStyle(child)
-    //                 .marginBottom.replace(/[^0-9\\.]+/g, '')
-    //             ) +
-    //             parseInt(
-    //               window
-    //                 .getComputedStyle(child)
-    //                 .marginTop.replace(/[^0-9\\.]+/g, '')
-    //             );
-    //         }
-    //       }
-
-    //       if (!isFillSize) {
-    //         siblingsNoFillTotalSize =
-    //           siblingsNoFillTotalSize +
-    //           parseInt(
-    //             window.getComputedStyle(child).height.replace(/[^0-9\\.]+/g, '')
-    //           );
-
-    //         marginsTotalSize =
-    //           marginsTotalSize +
-    //           parseInt(
-    //             window
-    //               .getComputedStyle(child)
-    //               .marginBottom.replace(/[^0-9\\.]+/g, '')
-    //           ) +
-    //           parseInt(
-    //             window
-    //               .getComputedStyle(child)
-    //               .marginTop.replace(/[^0-9\\.]+/g, '')
-    //           );
-    //       } else {
-    //         qtdParentChildrenFill++;
-    //       }
-    //     });
-
-    //     this._currentElement.parentNode.childNodes.forEach((child: any) => {
-    //       for (let i = 0; i < child.attributes.length; i++) {
-    //         if (
-    //           child.attributes[i].nodeName.search(`pbfx-item-size`) >= 0 &&
-    //           (child.attributes[i].nodeValue === `fill` ||
-    //             child.attributes[i].nodeValue === ``)
-    //         ) {
-    //           this._renderer2.setStyle(
-    //             child,
-    //             `min-height`,
-    //             `${
-    //               (parentTotalSize -
-    //                 (siblingsNoFillTotalSize + marginsTotalSize)) /
-    //               qtdParentChildrenFill
-    //             }px`
-    //           );
-
-    //           // this._renderer2.setStyle(child, `min-height`, `10px`);
-    //         }
-    //       }
-    //     });
-    //   }, 1);
-    // }
-
-    // if (parentDirection === `row`) {
-    //   parentTotalSize = parseInt(
-    //     window.getComputedStyle(this._currentElement.parentNode).width
-    //   );
-
-    //   setTimeout(() => {
-    //     currentItemNewSize =
-    //       parseInt(
-    //         window
-    //           .getComputedStyle(this._currentElement)
-    //           .width.replace(/[^\d.-]+/g, '')
-    //       ) + parseInt(this.pbfxItemOffset!);
-    //   }, 0);
-
-    //   this._renderer2.setStyle(
-    //     this._currentElement,
-    //     `margin-left`,
-    //     `${this.pbfxItemOffset}${this._unitType}`
-    //   );
-
-    //   // Adjust size sibilings %
-    //   this._currentElement.parentNode.childNodes.forEach((child: any) => {
-    //     for (let i = 0; i < child.attributes.length; i++) {
-    //       if (
-    //         child.attributes[i].nodeName.search(`pbfx-item-size`) >= 0 &&
-    //         child.attributes[i].nodeValue.search(/%/i) > 0
-    //       ) {
-    //         // setTimeout(() => {
-    //         //   this._renderer2.setStyle(
-    //         //     child,
-    //         //     `min-width`,
-    //         //     `${child.attributes[i].nodeValue}`
-    //         //   );
-    //         // }, 1);
-    //       }
-    //     }
-    //   });
-
-    //   // Adjust size sibilings fill
-    //   setTimeout(() => {
-    //     let isFillSize: boolean = false;
-    //     let marginsTotalSize: number = 0;
-    //     let qtdParentChildrenFill: number = 0;
-    //     let siblingsNoFillTotalSize: number = 0;
-    //     this._currentElement.parentNode.childNodes.forEach((child: any) => {
-    //       isFillSize = false;
-
-    //       for (let i = 0; i < child.attributes.length; i++) {
-    //         if (
-    //           child.attributes[i].nodeName.search(`pbfx-item-size`) >= 0 &&
-    //           (child.attributes[i].nodeValue === `fill` ||
-    //             child.attributes[i].nodeValue === ``)
-    //         ) {
-    //           isFillSize = true;
-
-    //           marginsTotalSize =
-    //             marginsTotalSize +
-    //             parseInt(
-    //               window
-    //                 .getComputedStyle(child)
-    //                 .marginLeft.replace(/[^0-9\\.]+/g, '')
-    //             ) +
-    //             parseInt(
-    //               window
-    //                 .getComputedStyle(child)
-    //                 .marginRight.replace(/[^0-9\\.]+/g, '')
-    //             );
-    //         }
-    //       }
-
-    //       if (!isFillSize) {
-    //         siblingsNoFillTotalSize =
-    //           siblingsNoFillTotalSize +
-    //           parseInt(
-    //             window.getComputedStyle(child).width.replace(/[^0-9\\.]+/g, '')
-    //           );
-
-    //         marginsTotalSize =
-    //           marginsTotalSize +
-    //           parseInt(
-    //             window
-    //               .getComputedStyle(child)
-    //               .marginLeft.replace(/[^0-9\\.]+/g, '')
-    //           ) +
-    //           parseInt(
-    //             window
-    //               .getComputedStyle(child)
-    //               .marginRight.replace(/[^0-9\\.]+/g, '')
-    //           );
-    //       } else {
-    //         qtdParentChildrenFill++;
-    //       }
-    //     });
-
-    //     this._currentElement.parentNode.childNodes.forEach((child: any) => {
-    //       for (let i = 0; i < child.attributes.length; i++) {
-    //         if (
-    //           child.attributes[i].nodeName.search(`pbfx-item-size`) >= 0 &&
-    //           (child.attributes[i].nodeValue === `fill` ||
-    //             child.attributes[i].nodeValue === ``)
-    //         ) {
-    //           // this._renderer2.setStyle(
-    //           //   child,
-    //           //   `min-width`,
-    //           //   `${
-    //           //     (parentTotalSize -
-    //           //       (siblingsNoFillTotalSize + marginsTotalSize)) /
-    //           //     qtdParentChildrenFill
-    //           //   }px`
-    //           // );
-    //         }
-    //       }
-    //     });
-    //   }, 1);
-    // }
   }
   // end setItemOffset(): void
 }

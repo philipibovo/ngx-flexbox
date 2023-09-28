@@ -5,6 +5,7 @@ import {
   Input,
   OnChanges,
   Renderer2,
+  RendererStyleFlags2,
 } from '@angular/core';
 
 const inputs = [
@@ -50,6 +51,7 @@ export class PbFlexLayoutDirective implements OnChanges {
   @Input(`pbFxLayoutAlign.md`) public pbfxAlignItemsMD: string = ``;
   @Input(`pbFxLayoutAlign.lg`) public pbfxAlignItemsLG: string = ``;
   @Input(`pbFxLayoutAlign.xl`) public pbfxAlignItemsXL: string = ``;
+  private _currentElement: any;
 
   constructor(private _elementRef: ElementRef, private _renderer2: Renderer2) {}
 
@@ -68,6 +70,8 @@ export class PbFlexLayoutDirective implements OnChanges {
   // end ngOnChanges(): void
 
   setScreenType(widthSize: number): void {
+    this._currentElement = <HTMLFormElement>this._elementRef.nativeElement;
+
     switch (true) {
       case widthSize >= 0 && widthSize <= 599:
         this.pbfxAlignDirection = this.pbfxAlignDirectionXS
@@ -120,19 +124,7 @@ export class PbFlexLayoutDirective implements OnChanges {
   // end setScreenType(): void
 
   setAlignment(): void {
-    this._renderer2.setStyle(
-      this._elementRef.nativeElement,
-      `box-sizing`,
-      `border-box`
-    );
-
-    this._renderer2.setStyle(this._elementRef.nativeElement, `display`, `flex`);
-
-    this._renderer2.setStyle(
-      this._elementRef.nativeElement,
-      `flex-direction`,
-      `${this.pbfxAlignDirection}`
-    );
+    const flags = RendererStyleFlags2.DashCase | RendererStyleFlags2.Important;
 
     let alignContent: string = ``;
     let alignItems: string = ``;
@@ -189,28 +181,40 @@ export class PbFlexLayoutDirective implements OnChanges {
         break;
     }
 
+    this._renderer2.removeStyle(this._currentElement, `box-sizing`);
+    this._renderer2.removeStyle(this._currentElement, `display`);
+    this._renderer2.removeStyle(this._currentElement, `flex-direction`);
+    this._renderer2.removeStyle(this._currentElement, `align-items`);
+    this._renderer2.removeStyle(this._currentElement, `justify-content`);
+
     this._renderer2.setStyle(
-      this._elementRef.nativeElement,
-      `align-content`,
-      `${alignContent}`
+      this._currentElement,
+      `box-sizing`,
+      `border-box`,
+      flags
+    );
+
+    this._renderer2.setStyle(this._currentElement, `display`, `flex`, flags);
+
+    this._renderer2.setStyle(
+      this._currentElement,
+      `flex-direction`,
+      `${this.pbfxAlignDirection}`,
+      flags
     );
 
     this._renderer2.setStyle(
-      this._elementRef.nativeElement,
+      this._currentElement,
       `align-items`,
-      `${alignItems}`
+      `${alignItems}`,
+      flags
     );
 
     this._renderer2.setStyle(
-      this._elementRef.nativeElement,
+      this._currentElement,
       `justify-content`,
-      `${justifyContent}`
-    );
-
-    this._renderer2.setStyle(
-      this._elementRef.nativeElement,
-      `place-content`,
-      `${alignContent} ${justifyContent}`
+      `${justifyContent}`,
+      flags
     );
   }
   // end setAlignment(): void

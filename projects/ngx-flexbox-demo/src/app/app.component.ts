@@ -117,8 +117,6 @@ export class AppComponent implements OnInit {
   changeItemsSizeShow(direction: string): void {
     this.itemsSizeShowDirection = direction;
 
-    console.log(direction);
-
     let auxType1: string = this.itemsSizeItemType1;
     let auxType2: string = this.itemsSizeItemType2;
     let auxType3: string = this.itemsSizeItemType3;
@@ -126,9 +124,12 @@ export class AppComponent implements OnInit {
     this.itemsSizeItemSize1++;
     this.itemsSizeItemSize2++;
     this.itemsSizeItemSize3++;
-    this.itemsSizeItemType1 = ``;
-    this.itemsSizeItemType2 = ``;
-    this.itemsSizeItemType3 = ``;
+    this.itemsSizeItemType1 =
+      this.itemsSizeItemType1 === `fill` ? this.itemsSizeItemType1 : ``;
+    this.itemsSizeItemType2 =
+      this.itemsSizeItemType2 === `fill` ? this.itemsSizeItemType2 : ``;
+    this.itemsSizeItemType3 =
+      this.itemsSizeItemType3 === `fill` ? this.itemsSizeItemType3 : ``;
 
     setTimeout(() => {
       if (this.itemsSizeShowDirection === `column`) {

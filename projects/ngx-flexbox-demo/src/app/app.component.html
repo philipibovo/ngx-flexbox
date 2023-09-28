@@ -767,13 +767,8 @@
         class="padding-bottom-20 padding-left-20 padding-right-20"
         [class.center]="isScreenXS || isScreenSM"
       >
-        You can use “px” (pixels) “%” (percentage), or CSS calc() function. When
-        using "px", the size of the item will be fixed, with the pixel size
-        being informed, but when using "%" the size of the item will be
-        calculated based on the percentage entered, this percentage refers to
-        the total size of the parent element. You can also use the attribute
-        without any value, then the size of the item will be equal to the space
-        available in the parent element.
+        You can use all CSS units (ch | cn | em | in | mm | pc | px | pt | rem |
+        vh | vmax | vm | vmin | vw | x | %), or CSS calc() function.
       </p>
 
       <div
@@ -809,7 +804,11 @@
         pbFxLayoutAlign="stretch start"
         [pbFxLayout]="itemsSizeShowDirection === 'row' ? 'column' : 'row'"
       >
-        <div [pbFxSize]="itemsSizeShowDirection === 'column' ? '50%' : ''">
+        <div
+          [style]="
+            itemsSizeShowDirection === 'column' ? 'width: 50%' : 'width: 100%'
+          "
+        >
           <div
             *ngIf="itemsSizeShowDirection === 'column'"
             class="showcase column margin-bottom-10"
@@ -968,7 +967,9 @@
               : 'center center'
           "
           [pbFxGap]="itemsSizeShowDirection === 'column' ? '20px' : null"
-          [pbFxSize]="itemsSizeShowDirection === 'column' ? '50%' : ''"
+          [style]="
+            itemsSizeShowDirection === 'column' ? 'width: 50%' : 'width: 100%'
+          "
         >
           <div pbFxLayout="row" pbFxLayoutAlign="center center">
             <div pbFxSize="100px">
@@ -1149,11 +1150,8 @@
         class="padding-bottom-20 padding-left-20 padding-right-20"
         [class.center]="isScreenXS || isScreenSM"
       >
-        You can use "px" (pixels), "%" (percentage) or CSS calc() function. When
-        using "px", the gap between the items will be fixed, with the pixel size
-        informed, but when using "%" the gap size will be calculated based on
-        the percentage entered, this percentage refers to the total size of the
-        parent element.
+        You can use all CSS units (ch | cn | em | in | mm | pc | px | pt | rem |
+        vh | vmax | vm | vmin | vw | x | %), or CSS calc() function.
       </p>
 
       <div
@@ -1288,8 +1286,6 @@
         pbFxGap.lg="30px"
         pbFxGap.xl="30px"
       >
-        <span>pbFxLayout="{{ childrenGapShowLayout }}"</span>
-        <span>pbFxLayoutAlign="stretch center"</span>
         <span>pbFxGap="10px"</span>
       </div>
     </div>
@@ -1395,7 +1391,8 @@
         class="padding-bottom-20 padding-left-20 padding-right-20"
         [class.center]="isScreenXS || isScreenSM"
       >
-        You can use "px" (pixels), "%" (percentage) or CSS calc() function.
+        You can use all CSS units (ch | cn | em | in | mm | pc | px | pt | rem |
+        vh | vmax | vm | vmin | vw | x | %), or CSS calc() function.
       </p>
 
       <div
@@ -1623,6 +1620,23 @@
         >
           8
         </div>
+      </div>
+
+      <div
+        class="code margin-bottom-20"
+        pbFxLayout.xs="column"
+        pbFxLayout.sm="column"
+        pbFxLayout.md="row"
+        pbFxLayout.lg="row"
+        pbFxLayout.xl="row"
+        pbFxLayoutAlign="center center"
+        pbFxGap.xs="0"
+        pbFxGap.sm="0"
+        pbFxGap.md="30px"
+        pbFxGap.lg="30px"
+        pbFxGap.xl="30px"
+      >
+        <span>pbFxWrap="wrap"</span>
       </div>
     </div>
   </section>

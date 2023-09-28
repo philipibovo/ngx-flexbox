@@ -5,6 +5,7 @@ import {
   Input,
   OnChanges,
   Renderer2,
+  RendererStyleFlags2,
 } from '@angular/core';
 
 const inputs = [
@@ -34,8 +35,6 @@ export class PbFlexGapDirective implements OnChanges {
   @Input(`pbFxGap.xl`) public pbfxChildrenGapXL: string | null = ``;
   private _currentElement: any;
   private _directiveContent: string = ``;
-  private _size: number = 0;
-  private _unitType: string = ``;
 
   constructor(private _elementRef: ElementRef, private _renderer2: Renderer2) {}
 
@@ -62,9 +61,9 @@ export class PbFlexGapDirective implements OnChanges {
           return;
         }
 
-        this.pbfxChildrenGap = this.pbfxChildrenGapXS
+        this._directiveContent = this.pbfxChildrenGapXS
           ? this.pbfxChildrenGapXS
-          : this.pbfxChildrenGap;
+          : this.pbfxChildrenGap!;
         break;
 
       case widthSize >= 600 && widthSize <= 959:
@@ -72,9 +71,9 @@ export class PbFlexGapDirective implements OnChanges {
           return;
         }
 
-        this.pbfxChildrenGap = this.pbfxChildrenGapSM
+        this._directiveContent = this.pbfxChildrenGapSM
           ? this.pbfxChildrenGapSM
-          : this.pbfxChildrenGap;
+          : this.pbfxChildrenGap!;
         break;
 
       case widthSize >= 960 && widthSize <= 1279:
@@ -82,9 +81,9 @@ export class PbFlexGapDirective implements OnChanges {
           return;
         }
 
-        this.pbfxChildrenGap = this.pbfxChildrenGapMD
+        this._directiveContent = this.pbfxChildrenGapMD
           ? this.pbfxChildrenGapMD
-          : this.pbfxChildrenGap;
+          : this.pbfxChildrenGap!;
         break;
 
       case widthSize >= 1280 && widthSize <= 1919:
@@ -92,9 +91,9 @@ export class PbFlexGapDirective implements OnChanges {
           return;
         }
 
-        this.pbfxChildrenGap = this.pbfxChildrenGapLG
+        this._directiveContent = this.pbfxChildrenGapLG
           ? this.pbfxChildrenGapLG
-          : this.pbfxChildrenGap;
+          : this.pbfxChildrenGap!;
         break;
 
       case widthSize >= 1920:
@@ -102,18 +101,19 @@ export class PbFlexGapDirective implements OnChanges {
           return;
         }
 
-        this.pbfxChildrenGap = this.pbfxChildrenGapXL
+        this._directiveContent = this.pbfxChildrenGapXL
           ? this.pbfxChildrenGapXL
-          : this.pbfxChildrenGap;
+          : this.pbfxChildrenGap!;
         break;
     }
 
-    if (this.pbfxChildrenGap!.search(/calc/i) >= 0) {
-      this._directiveContent = this.pbfxChildrenGap!;
-      this._unitType = `calc`;
-    } else {
-      this._size = parseInt(this.pbfxChildrenGap!.replace(/[^\d.-]+/g, ''));
-      this._unitType = this.pbfxChildrenGap!.search(/px/i) > 0 ? `px` : `%`;
+    if (
+      this._directiveContent.search(/calc/i) === -1 &&
+      !this._directiveContent.match(
+        /ch|cn|em|in|mm|pc|px|pt|rem|vh|vmax|vm|vmin|vw|x|%/g
+      )
+    ) {
+      this._directiveContent += `%`;
     }
 
     this.setChildrenGap();
@@ -121,15 +121,15 @@ export class PbFlexGapDirective implements OnChanges {
   // end setScreenType(): void
 
   setChildrenGap(): void {
-    let finalCssValue: string = ``;
+    const flags = RendererStyleFlags2.DashCase | RendererStyleFlags2.Important;
+    this._renderer2.removeStyle(this._currentElement, `gap`);
 
-    if (this._unitType === `calc`) {
-      finalCssValue = this._directiveContent;
-    } else {
-      finalCssValue = `${this._size}${this._unitType}`;
-    }
-
-    this._renderer2.setStyle(this._currentElement, `gap`, finalCssValue);
+    this._renderer2.setStyle(
+      this._currentElement,
+      `gap`,
+      this._directiveContent,
+      flags
+    );
   }
   // end setChildrenGap(): void
 }

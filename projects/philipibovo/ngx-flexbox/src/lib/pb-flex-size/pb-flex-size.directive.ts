@@ -6,6 +6,7 @@ import {
   OnChanges,
   OnInit,
   Renderer2,
+  RendererStyleFlags2,
 } from '@angular/core';
 import { debounceTime, Subject } from 'rxjs';
 
@@ -38,8 +39,6 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
   private _currentElement: any;
   private _isFill: boolean = false;
   private _directiveContent: string = ``;
-  private _size: number = 0;
-  private _unitType: string = ``;
   private _windowResizeEvent$: Subject<any> = new Subject<any>();
 
   constructor(private _elementRef: ElementRef, private _renderer2: Renderer2) {}
@@ -63,7 +62,7 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
   // end ngOnChanges(): void
 
   setScreenType(widthSize: number) {
-    this._currentElement = <HTMLFormElement>this._elementRef.nativeElement;
+    this._currentElement = <HTMLElement>this._elementRef.nativeElement;
     this._isFill = false;
 
     switch (true) {
@@ -80,29 +79,9 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
         ) {
           this._isFill = true;
         } else {
-          if (this.pbfxItemSizeXS) {
-            if (this.pbfxItemSizeXS.search(/calc/i) >= 0) {
-              this._directiveContent = this.pbfxItemSizeXS;
-              this._unitType = `calc`;
-            } else {
-              this._unitType =
-                this.pbfxItemSizeXS.search(/px/i) >= 0 ? `px` : `%`;
-            }
-          } else {
-            if (this.pbfxItemSize!.search(/calc/i) >= 0) {
-              this._directiveContent = this.pbfxItemSize!;
-              this._unitType = `calc`;
-            } else {
-              this._unitType =
-                this.pbfxItemSize!.search(/px/i) >= 0 ? `px` : `%`;
-            }
-          }
-
-          if (this._unitType !== `calc`) {
-            this._size = this.pbfxItemSizeXS
-              ? parseInt(this.pbfxItemSizeXS!.replace(/[^\d.-]+/g, ''))
-              : parseInt(this.pbfxItemSize!.replace(/[^\d.-]+/g, ''));
-          }
+          this._directiveContent = this.pbfxItemSizeXS
+            ? this.pbfxItemSizeXS
+            : this.pbfxItemSize!;
         }
         break;
 
@@ -119,29 +98,9 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
         ) {
           this._isFill = true;
         } else {
-          if (this.pbfxItemSizeSM) {
-            if (this.pbfxItemSizeSM.search(/calc/i) >= 0) {
-              this._directiveContent = this.pbfxItemSizeSM;
-              this._unitType = `calc`;
-            } else {
-              this._unitType =
-                this.pbfxItemSizeSM.search(/px/i) >= 0 ? `px` : `%`;
-            }
-          } else {
-            if (this.pbfxItemSize!.search(/calc/i) >= 0) {
-              this._directiveContent = this.pbfxItemSize!;
-              this._unitType = `calc`;
-            } else {
-              this._unitType =
-                this.pbfxItemSize!.search(/px/i) >= 0 ? `px` : `%`;
-            }
-          }
-
-          if (this._unitType !== `calc`) {
-            this._size = this.pbfxItemSizeSM
-              ? parseInt(this.pbfxItemSizeSM!.replace(/[^\d.-]+/g, ''))
-              : parseInt(this.pbfxItemSize!.replace(/[^\d.-]+/g, ''));
-          }
+          this._directiveContent = this.pbfxItemSizeSM
+            ? this.pbfxItemSizeSM
+            : this.pbfxItemSize!;
         }
         break;
 
@@ -158,29 +117,9 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
         ) {
           this._isFill = true;
         } else {
-          if (this.pbfxItemSizeMD) {
-            if (this.pbfxItemSizeMD.search(/calc/i) >= 0) {
-              this._directiveContent = this.pbfxItemSizeMD;
-              this._unitType = `calc`;
-            } else {
-              this._unitType =
-                this.pbfxItemSizeMD.search(/px/i) >= 0 ? `px` : `%`;
-            }
-          } else {
-            if (this.pbfxItemSize!.search(/calc/i) >= 0) {
-              this._directiveContent = this.pbfxItemSize!;
-              this._unitType = `calc`;
-            } else {
-              this._unitType =
-                this.pbfxItemSize!.search(/px/i) >= 0 ? `px` : `%`;
-            }
-          }
-
-          if (this._unitType !== `calc`) {
-            this._size = this.pbfxItemSizeMD
-              ? parseInt(this.pbfxItemSizeMD!.replace(/[^\d.-]+/g, ''))
-              : parseInt(this.pbfxItemSize!.replace(/[^\d.-]+/g, ''));
-          }
+          this._directiveContent = this.pbfxItemSizeMD
+            ? this.pbfxItemSizeMD
+            : this.pbfxItemSize!;
         }
         break;
 
@@ -197,29 +136,9 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
         ) {
           this._isFill = true;
         } else {
-          if (this.pbfxItemSizeLG) {
-            if (this.pbfxItemSizeLG.search(/calc/i) >= 0) {
-              this._directiveContent = this.pbfxItemSizeLG;
-              this._unitType = `calc`;
-            } else {
-              this._unitType =
-                this.pbfxItemSizeLG.search(/px/i) >= 0 ? `px` : `%`;
-            }
-          } else {
-            if (this.pbfxItemSize!.search(/calc/i) >= 0) {
-              this._directiveContent = this.pbfxItemSize!;
-              this._unitType = `calc`;
-            } else {
-              this._unitType =
-                this.pbfxItemSize!.search(/px/i) >= 0 ? `px` : `%`;
-            }
-          }
-
-          if (this._unitType !== `calc`) {
-            this._size = this.pbfxItemSizeLG
-              ? parseInt(this.pbfxItemSizeLG!.replace(/[^\d.-]+/g, ''))
-              : parseInt(this.pbfxItemSize!.replace(/[^\d.-]+/g, ''));
-          }
+          this._directiveContent = this.pbfxItemSizeLG
+            ? this.pbfxItemSizeLG
+            : this.pbfxItemSize!;
         }
         break;
 
@@ -236,31 +155,21 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
         ) {
           this._isFill = true;
         } else {
-          if (this.pbfxItemSizeXL) {
-            if (this.pbfxItemSizeXL.search(/calc/i) >= 0) {
-              this._directiveContent = this.pbfxItemSizeXL;
-              this._unitType = `calc`;
-            } else {
-              this._unitType =
-                this.pbfxItemSizeXL.search(/px/i) >= 0 ? `px` : `%`;
-            }
-          } else {
-            if (this.pbfxItemSize!.search(/calc/i) >= 0) {
-              this._directiveContent = this.pbfxItemSize!;
-              this._unitType = `calc`;
-            } else {
-              this._unitType =
-                this.pbfxItemSize!.search(/px/i) >= 0 ? `px` : `%`;
-            }
-          }
-
-          if (this._unitType !== `calc`) {
-            this._size = this.pbfxItemSizeXL
-              ? parseInt(this.pbfxItemSizeXL!.replace(/[^\d.-]+/g, ''))
-              : parseInt(this.pbfxItemSize!.replace(/[^\d.-]+/g, ''));
-          }
+          this._directiveContent = this.pbfxItemSizeXL
+            ? this.pbfxItemSizeXL
+            : this.pbfxItemSize!;
         }
         break;
+    }
+
+    if (
+      !this._isFill &&
+      this._directiveContent.search(/calc/i) === -1 &&
+      !this._directiveContent.match(
+        /ch|cn|em|in|mm|pc|px|pt|rem|vh|vmax|vm|vmin|vw|x|%/g
+      )
+    ) {
+      this._directiveContent += `%`;
     }
 
     this.setItemSize();
@@ -268,20 +177,84 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
   // end async setScreenType(widthSize: number)
 
   setItemSize(): void {
+    const flags = RendererStyleFlags2.DashCase | RendererStyleFlags2.Important;
+    const parentDirection: string = window.getComputedStyle(
+      this._currentElement.parentNode
+    ).flexDirection;
+
+    if (this._currentElement.getAttribute(`id`) === `asdXX`) {
+      console.log(parentDirection);
+    }
+
     this._renderer2.removeStyle(this._currentElement, `flex`);
 
     if (this._isFill) {
-      this._renderer2.setStyle(this._currentElement, `flex`, `1 auto`);
+      this._renderer2.setStyle(this._currentElement, `flex`, `1 auto`, flags);
     } else {
-      let finalCssValue: string = ``;
+      if (parentDirection === `column`) {
+        this._renderer2.removeStyle(this._currentElement, `max-height`);
+        this._renderer2.removeStyle(this._currentElement, `min-height`);
+        this._renderer2.removeStyle(this._currentElement, `height`);
 
-      if (this._unitType === `calc`) {
-        finalCssValue = `0 ${this._directiveContent}`;
+        this._renderer2.setStyle(
+          this._currentElement,
+          'max-height',
+          this._directiveContent,
+          flags
+        );
+
+        this._renderer2.setStyle(
+          this._currentElement,
+          'min-height',
+          this._directiveContent,
+          flags
+        );
+
+        this._renderer2.setStyle(
+          this._currentElement,
+          'height',
+          this._directiveContent,
+          flags
+        );
       } else {
-        finalCssValue = `0 ${this._size}${this._unitType}`;
+        this._renderer2.removeStyle(this._currentElement, `max-width`);
+        this._renderer2.removeStyle(this._currentElement, `min-width`);
+        this._renderer2.removeStyle(this._currentElement, `width`);
+
+        this._renderer2.setStyle(
+          this._currentElement,
+          'max-width',
+          this._directiveContent,
+          flags
+        );
+
+        this._renderer2.setStyle(
+          this._currentElement,
+          'min-width',
+          this._directiveContent,
+          flags
+        );
+
+        this._renderer2.setStyle(
+          this._currentElement,
+          'width',
+          this._directiveContent,
+          flags
+        );
       }
 
-      this._renderer2.setStyle(this._currentElement, `flex`, finalCssValue);
+      this._renderer2.setStyle(
+        this._currentElement,
+        `flex`,
+        `0 ${this._directiveContent}`,
+        flags
+      );
+
+      // this._renderer2.setStyle(
+      //   this._currentElement,
+      //   `width`,
+      //   this._directiveContent
+      // );
     }
   }
   // end setItemSize(): void
