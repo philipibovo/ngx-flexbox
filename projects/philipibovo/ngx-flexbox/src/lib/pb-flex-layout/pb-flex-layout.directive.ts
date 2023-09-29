@@ -52,6 +52,8 @@ export class PbFlexLayoutDirective implements OnChanges {
   @Input(`pbFxLayoutAlign.lg`) public pbfxAlignItemsLG: string = ``;
   @Input(`pbFxLayoutAlign.xl`) public pbfxAlignItemsXL: string = ``;
   private _currentElement: any;
+  private _directiveDirectionContent: string = ``;
+  private _directiveAlignItemsContent: string = ``;
 
   constructor(private _elementRef: ElementRef, private _renderer2: Renderer2) {}
 
@@ -74,46 +76,46 @@ export class PbFlexLayoutDirective implements OnChanges {
 
     switch (true) {
       case widthSize >= 0 && widthSize <= 599:
-        this.pbfxAlignDirection = this.pbfxAlignDirectionXS
+        this._directiveDirectionContent = this.pbfxAlignDirectionXS
           ? this.pbfxAlignDirectionXS
           : this.pbfxAlignDirection;
-        this.pbfxAlignItems = this.pbfxAlignItemsXS
+        this._directiveAlignItemsContent = this.pbfxAlignItemsXS
           ? this.pbfxAlignItemsXS
           : this.pbfxAlignItems;
         break;
 
       case widthSize >= 600 && widthSize <= 959:
-        this.pbfxAlignDirection = this.pbfxAlignDirectionSM
+        this._directiveDirectionContent = this.pbfxAlignDirectionSM
           ? this.pbfxAlignDirectionSM
           : this.pbfxAlignDirection;
-        this.pbfxAlignItems = this.pbfxAlignItemsSM
+        this._directiveAlignItemsContent = this.pbfxAlignItemsSM
           ? this.pbfxAlignItemsSM
           : this.pbfxAlignItems;
         break;
 
       case widthSize >= 960 && widthSize <= 1279:
-        this.pbfxAlignDirection = this.pbfxAlignDirectionMD
+        this._directiveDirectionContent = this.pbfxAlignDirectionMD
           ? this.pbfxAlignDirectionMD
           : this.pbfxAlignDirection;
-        this.pbfxAlignItems = this.pbfxAlignItemsMD
+        this._directiveAlignItemsContent = this.pbfxAlignItemsMD
           ? this.pbfxAlignItemsMD
           : this.pbfxAlignItems;
         break;
 
       case widthSize >= 1280 && widthSize <= 1919:
-        this.pbfxAlignDirection = this.pbfxAlignDirectionLG
+        this._directiveDirectionContent = this.pbfxAlignDirectionLG
           ? this.pbfxAlignDirectionLG
           : this.pbfxAlignDirection;
-        this.pbfxAlignItems = this.pbfxAlignItemsLG
+        this._directiveAlignItemsContent = this.pbfxAlignItemsLG
           ? this.pbfxAlignItemsLG
           : this.pbfxAlignItems;
         break;
 
       case widthSize >= 1920:
-        this.pbfxAlignDirection = this.pbfxAlignDirectionXL
+        this._directiveDirectionContent = this.pbfxAlignDirectionXL
           ? this.pbfxAlignDirectionXL
           : this.pbfxAlignDirection;
-        this.pbfxAlignItems = this.pbfxAlignItemsXL
+        this._directiveAlignItemsContent = this.pbfxAlignItemsXL
           ? this.pbfxAlignItemsXL
           : this.pbfxAlignItems;
         break;
@@ -126,35 +128,30 @@ export class PbFlexLayoutDirective implements OnChanges {
   setAlignment(): void {
     const flags = RendererStyleFlags2.DashCase | RendererStyleFlags2.Important;
 
-    let alignContent: string = ``;
     let alignItems: string = ``;
     let justifyContent: string = ``;
 
     // Align Items
-    switch (this.pbfxAlignItems.split(' ')[0]) {
+    switch (this._directiveAlignItemsContent.split(' ')[0]) {
       case 'start':
       case 'flex-start':
-        alignContent = 'flex-start';
         alignItems = 'flex-start';
         break;
       case 'center':
-        alignContent = 'center';
         alignItems = 'center';
         break;
       case 'end':
       case 'flex-end':
-        alignContent = 'flex-end';
         alignItems = 'flex-end';
         break;
       case 'stretch':
       default:
-        alignContent = 'stretch';
         alignItems = 'stretch';
         break;
     }
 
     // Justify Content
-    switch (this.pbfxAlignItems.split(' ')[1]) {
+    switch (this._directiveAlignItemsContent.split(' ')[1]) {
       case 'center':
         justifyContent = 'center';
         break;
@@ -199,21 +196,21 @@ export class PbFlexLayoutDirective implements OnChanges {
     this._renderer2.setStyle(
       this._currentElement,
       `flex-direction`,
-      `${this.pbfxAlignDirection}`,
+      this._directiveDirectionContent,
       flags
     );
 
     this._renderer2.setStyle(
       this._currentElement,
       `align-items`,
-      `${alignItems}`,
+      alignItems,
       flags
     );
 
     this._renderer2.setStyle(
       this._currentElement,
       `justify-content`,
-      `${justifyContent}`,
+      justifyContent,
       flags
     );
   }

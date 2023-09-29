@@ -182,79 +182,17 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
       this._currentElement.parentNode
     ).flexDirection;
 
-    if (this._currentElement.getAttribute(`id`) === `asdXX`) {
-      console.log(parentDirection);
-    }
-
     this._renderer2.removeStyle(this._currentElement, `flex`);
 
     if (this._isFill) {
       this._renderer2.setStyle(this._currentElement, `flex`, `1 auto`, flags);
     } else {
-      if (parentDirection === `column`) {
-        this._renderer2.removeStyle(this._currentElement, `max-height`);
-        this._renderer2.removeStyle(this._currentElement, `min-height`);
-        this._renderer2.removeStyle(this._currentElement, `height`);
-
-        this._renderer2.setStyle(
-          this._currentElement,
-          'max-height',
-          this._directiveContent,
-          flags
-        );
-
-        this._renderer2.setStyle(
-          this._currentElement,
-          'min-height',
-          this._directiveContent,
-          flags
-        );
-
-        this._renderer2.setStyle(
-          this._currentElement,
-          'height',
-          this._directiveContent,
-          flags
-        );
-      } else {
-        this._renderer2.removeStyle(this._currentElement, `max-width`);
-        this._renderer2.removeStyle(this._currentElement, `min-width`);
-        this._renderer2.removeStyle(this._currentElement, `width`);
-
-        this._renderer2.setStyle(
-          this._currentElement,
-          'max-width',
-          this._directiveContent,
-          flags
-        );
-
-        this._renderer2.setStyle(
-          this._currentElement,
-          'min-width',
-          this._directiveContent,
-          flags
-        );
-
-        this._renderer2.setStyle(
-          this._currentElement,
-          'width',
-          this._directiveContent,
-          flags
-        );
-      }
-
       this._renderer2.setStyle(
         this._currentElement,
         `flex`,
         `0 ${this._directiveContent}`,
         flags
       );
-
-      // this._renderer2.setStyle(
-      //   this._currentElement,
-      //   `width`,
-      //   this._directiveContent
-      // );
     }
   }
   // end setItemSize(): void

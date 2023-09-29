@@ -36,6 +36,7 @@ export class PbFlexOrderDirective implements OnChanges, OnInit {
   @Input(`pbFxOrder.lg`) public pbfxItemOrderLG: string | null = null;
   @Input(`pbFxOrder.xl`) public pbfxItemOrderXL: string | null = null;
   private _currentElement: any;
+  private _directiveContent: string = ``;
   private _order: number = 0;
   private _windowResizeEvent$: Subject<any> = new Subject<any>();
 
@@ -68,9 +69,9 @@ export class PbFlexOrderDirective implements OnChanges, OnInit {
           return;
         }
 
-        this.pbfxItemOrder = this.pbfxItemOrderXS
+        this._directiveContent = this.pbfxItemOrderXS
           ? this.pbfxItemOrderXS
-          : this.pbfxItemOrder;
+          : this.pbfxItemOrder!;
         break;
 
       case widthSize >= 600 && widthSize <= 959:
@@ -78,9 +79,9 @@ export class PbFlexOrderDirective implements OnChanges, OnInit {
           return;
         }
 
-        this.pbfxItemOrder = this.pbfxItemOrderSM
+        this._directiveContent = this.pbfxItemOrderSM
           ? this.pbfxItemOrderSM
-          : this.pbfxItemOrder;
+          : this.pbfxItemOrder!;
         break;
 
       case widthSize >= 960 && widthSize <= 1279:
@@ -88,9 +89,9 @@ export class PbFlexOrderDirective implements OnChanges, OnInit {
           return;
         }
 
-        this.pbfxItemOrder = this.pbfxItemOrderMD
+        this._directiveContent = this.pbfxItemOrderMD
           ? this.pbfxItemOrderMD
-          : this.pbfxItemOrder;
+          : this.pbfxItemOrder!;
         break;
 
       case widthSize >= 1280 && widthSize <= 1919:
@@ -98,9 +99,9 @@ export class PbFlexOrderDirective implements OnChanges, OnInit {
           return;
         }
 
-        this.pbfxItemOrder = this.pbfxItemOrderLG
+        this._directiveContent = this.pbfxItemOrderLG
           ? this.pbfxItemOrderLG
-          : this.pbfxItemOrder;
+          : this.pbfxItemOrder!;
         break;
 
       case widthSize >= 1920:
@@ -108,13 +109,13 @@ export class PbFlexOrderDirective implements OnChanges, OnInit {
           return;
         }
 
-        this.pbfxItemOrder = this.pbfxItemOrderXL
+        this._directiveContent = this.pbfxItemOrderXL
           ? this.pbfxItemOrderXL
-          : this.pbfxItemOrder;
+          : this.pbfxItemOrder!;
         break;
     }
 
-    this._order = parseInt(this.pbfxItemOrder!.replace(/[^\d.-]+/g, ''));
+    this._order = parseInt(this._directiveContent!.replace(/[^\d.-]+/g, ''));
 
     setTimeout(() => {
       this.setItemOrder();
@@ -123,6 +124,7 @@ export class PbFlexOrderDirective implements OnChanges, OnInit {
   // end setScreenType(): void
 
   setItemOrder(): void {
+    this._renderer2.removeStyle(this._currentElement, `order`);
     this._renderer2.setStyle(this._currentElement, `order`, this._order);
   }
   // end setItemOrder(): void
