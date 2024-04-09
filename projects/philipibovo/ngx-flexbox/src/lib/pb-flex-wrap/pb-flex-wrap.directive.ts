@@ -110,6 +110,52 @@ export class PbFlexWrapDirective {
   // end setScreenType(): void
 
   setWrap(): void {
+    if (this._currentElement.getAttribute(`pbFxGap`)) {
+      let gapSize = `${this._currentElement
+        .getAttribute(`pbFxGap`)
+        .match(/\d+/g)}`;
+      let gapUnit = `${this._currentElement
+        .getAttribute(`pbFxGap`)
+        .match(/ch|cn|em|in|mm|pc|px|pt|rem|vh|vmax|vm|vmin|vw|x|%/g)}`;
+      let parentFlexDirection: string =
+        this._currentElement.style.flexDirection;
+      const totalSibilings: number = this._currentElement.childNodes.length;
+
+      // console.log(gapSize);
+      // console.log(gapUnit);
+      // console.log(parentFlexDirection);
+
+      if (gapSize) {
+        if (!gapUnit) {
+          gapUnit = `%`;
+        }
+
+        this._currentElement.childNodes.forEach(
+          (sibling: HTMLElement, i: number) => {
+            let sibilingSize;
+
+            if (parentFlexDirection === `column`) {
+              if (i === 0 || i === totalSibilings - 1) {
+                sibilingSize = `calc(${sibling.clientHeight} - ${
+                  parseInt(gapSize) / 2
+                }${gapUnit})`;
+              } else {
+                sibilingSize = `calc(${sibling.clientHeight} - ${gapSize}${gapUnit})`;
+              }
+            } else {
+              if (i === 0 || i === totalSibilings - 1) {
+                sibilingSize = `calc(${sibling.clientWidth} - ${
+                  parseInt(gapSize) / 2
+                }${gapUnit})`;
+              } else {
+                sibilingSize = `calc(${sibling.clientWidth} - ${gapSize}${gapUnit})`;
+              }
+            }
+          }
+        );
+      }
+    }
+
     this._renderer2.setStyle(this._currentElement, `flex-wrap`, this.pbfxWrap);
   }
   // end setWrap(): void

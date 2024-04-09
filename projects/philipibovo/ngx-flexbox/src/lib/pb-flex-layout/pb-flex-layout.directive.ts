@@ -168,9 +168,6 @@ export class PbFlexLayoutDirective implements OnChanges {
       case 'flex-end':
         justifyContent = 'flex-end';
         break;
-      case 'stretch':
-        justifyContent = 'stretch';
-        break;
       case 'start':
       case 'flex-start':
       default:

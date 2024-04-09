@@ -63,6 +63,7 @@
               "projects/ngx-flexbox-demo/src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/ngx-flexbox-demo/src/styles.scss"
             ],
             "scripts": []
@@ -126,6 +127,7 @@
               "projects/ngx-flexbox-demo/src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/ngx-flexbox-demo/src/styles.scss"
             ],
             "scripts": []

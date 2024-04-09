@@ -65,6 +65,9 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
     this._currentElement = <HTMLElement>this._elementRef.nativeElement;
     this._isFill = false;
 
+    const parentEl = this._currentElement.parentNode as HTMLElement;
+    const parentFlexAlignItems: string = parentEl.style.alignItems;
+
     switch (true) {
       case widthSize >= 0 && widthSize <= 599:
         if (this.pbfxItemSize === null && this.pbfxItemSizeXS === null) {
@@ -75,7 +78,8 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
           this.pbfxItemSize === `` ||
           this.pbfxItemSize === `fill` ||
           this.pbfxItemSizeXS === `` ||
-          this.pbfxItemSizeXS === `fill`
+          this.pbfxItemSizeXS === `fill` ||
+          parentFlexAlignItems === `stretch`
         ) {
           this._isFill = true;
         } else {
@@ -83,6 +87,7 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
             ? this.pbfxItemSizeXS
             : this.pbfxItemSize!;
         }
+
         break;
 
       case widthSize >= 600 && widthSize <= 959:
@@ -94,7 +99,8 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
           this.pbfxItemSize === `` ||
           this.pbfxItemSize === `fill` ||
           this.pbfxItemSizeSM === `` ||
-          this.pbfxItemSizeSM === `fill`
+          this.pbfxItemSizeSM === `fill` ||
+          parentFlexAlignItems === `stretch`
         ) {
           this._isFill = true;
         } else {
@@ -113,7 +119,8 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
           this.pbfxItemSize === `` ||
           this.pbfxItemSize === `fill` ||
           this.pbfxItemSizeMD === `` ||
-          this.pbfxItemSizeMD === `fill`
+          this.pbfxItemSizeMD === `fill` ||
+          parentFlexAlignItems === `stretch`
         ) {
           this._isFill = true;
         } else {
@@ -132,7 +139,8 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
           this.pbfxItemSize === `` ||
           this.pbfxItemSize === `fill` ||
           this.pbfxItemSizeLG === `` ||
-          this.pbfxItemSizeLG === `fill`
+          this.pbfxItemSizeLG === `fill` ||
+          parentFlexAlignItems === `stretch`
         ) {
           this._isFill = true;
         } else {
@@ -151,7 +159,8 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
           this.pbfxItemSize === `` ||
           this.pbfxItemSize === `fill` ||
           this.pbfxItemSizeXL === `` ||
-          this.pbfxItemSizeXL === `fill`
+          this.pbfxItemSizeXL === `fill` ||
+          parentFlexAlignItems === `stretch`
         ) {
           this._isFill = true;
         } else {
@@ -178,21 +187,76 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
 
   setItemSize(): void {
     const flags = RendererStyleFlags2.DashCase | RendererStyleFlags2.Important;
-    const parentDirection: string = window.getComputedStyle(
-      this._currentElement.parentNode
-    ).flexDirection;
+    const parentEl = this._currentElement.parentNode as HTMLElement;
 
     this._renderer2.removeStyle(this._currentElement, `flex`);
+    this._renderer2.removeStyle(this._currentElement, `height`);
+    this._renderer2.removeStyle(this._currentElement, `max-height`);
+    this._renderer2.removeStyle(this._currentElement, `max-width`);
+    this._renderer2.removeStyle(this._currentElement, `width`);
 
     if (this._isFill) {
       this._renderer2.setStyle(this._currentElement, `flex`, `1 auto`, flags);
     } else {
+      let finalSize: string = this._directiveContent;
+
+      // Calculate size minus sibiling's gap
+      if (!this._directiveContent.match(/calc/g)) {
+        if (parentEl.style.gap) {
+          let gapSize = `${parentEl.style.gap.match(/\d+/g)}`;
+          let gapUnit = `${parentEl.style.gap.match(
+            /ch|cn|em|in|mm|pc|px|pt|rem|vh|vmax|vm|vmin|vw|x|%/g
+          )}`;
+          const totalSibilings: number = parentEl.childNodes.length;
+
+          if (gapSize) {
+            if (!gapUnit) {
+              gapUnit = `%`;
+            }
+
+            parentEl.childNodes.forEach((sibling, i) => {
+              if (i === 0 || i === totalSibilings - 1) {
+                finalSize = `calc(${this._directiveContent} - ${
+                  parseInt(gapSize) / 2
+                }${gapUnit})`;
+              } else {
+                finalSize = `calc(${this._directiveContent} - ${gapSize}${gapUnit})`;
+              }
+            });
+          }
+        }
+      }
+
+      // Set Flex size
       this._renderer2.setStyle(
         this._currentElement,
         `flex`,
-        `0 ${this._directiveContent}`,
+        `0 ${finalSize}`,
         flags
       );
+
+      // Set max-size
+      if (parentEl.style.alignItems !== `stretch`) {
+        switch (parentEl.style.flexDirection) {
+          case `column`:
+            this._renderer2.setStyle(
+              this._currentElement,
+              `max-height`,
+              finalSize,
+              flags
+            );
+            break;
+
+          case `row`:
+            this._renderer2.setStyle(
+              this._currentElement,
+              `max-width`,
+              finalSize,
+              flags
+            );
+            break;
+        }
+      }
     }
   }
   // end setItemSize(): void
