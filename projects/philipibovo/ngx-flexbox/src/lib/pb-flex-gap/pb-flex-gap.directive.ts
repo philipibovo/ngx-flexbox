@@ -25,7 +25,7 @@ const selector = `
   [pbFxGap.xl],
 `;
 
-@Directive({ inputs, selector })
+@Directive({ inputs, selector, standalone: false })
 export class PbFlexGapDirective implements OnChanges {
   @Input(`pbFxGap`) public pbfxChildrenGap: string | null = ``;
   @Input(`pbFxGap.xs`) public pbfxChildrenGapXS: string | null = ``;
@@ -56,7 +56,7 @@ export class PbFlexGapDirective implements OnChanges {
     this._currentElement = <HTMLFormElement>this._elementRef.nativeElement;
 
     switch (true) {
-      case widthSize >= 0 && widthSize <= 599:
+      case widthSize >= 0 && widthSize <= 767:
         if (!this.pbfxChildrenGap && !this.pbfxChildrenGapXS) {
           return;
         }
@@ -66,7 +66,7 @@ export class PbFlexGapDirective implements OnChanges {
           : this.pbfxChildrenGap!;
         break;
 
-      case widthSize >= 600 && widthSize <= 959:
+      case widthSize >= 768 && widthSize <= 1023:
         if (!this.pbfxChildrenGap && !this.pbfxChildrenGapSM) {
           return;
         }
@@ -76,7 +76,7 @@ export class PbFlexGapDirective implements OnChanges {
           : this.pbfxChildrenGap!;
         break;
 
-      case widthSize >= 960 && widthSize <= 1279:
+      case widthSize >= 1024 && widthSize <= 1279:
         if (!this.pbfxChildrenGap && !this.pbfxChildrenGapMD) {
           return;
         }

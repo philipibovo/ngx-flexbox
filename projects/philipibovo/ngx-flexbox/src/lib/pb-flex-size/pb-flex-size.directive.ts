@@ -28,7 +28,7 @@ const selector = `
   [pbFxSize.xl],
 `;
 
-@Directive({ inputs, selector })
+@Directive({ inputs, selector, standalone: false })
 export class PbFlexSizeDirective implements OnChanges, OnInit {
   @Input(`pbFxSize`) public pbfxItemSize: string | null = null;
   @Input(`pbFxSize.xs`) public pbfxItemSizeXS: string | null = null;
@@ -69,7 +69,7 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
     const parentFlexAlignItems: string = parentEl.style.alignItems;
 
     switch (true) {
-      case widthSize >= 0 && widthSize <= 599:
+      case widthSize >= 0 && widthSize <= 767:
         if (this.pbfxItemSize === null && this.pbfxItemSizeXS === null) {
           return;
         }
@@ -90,7 +90,7 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
 
         break;
 
-      case widthSize >= 600 && widthSize <= 959:
+      case widthSize >= 768 && widthSize <= 1023:
         if (this.pbfxItemSize === null && this.pbfxItemSizeSM === null) {
           return;
         }
@@ -110,7 +110,7 @@ export class PbFlexSizeDirective implements OnChanges, OnInit {
         }
         break;
 
-      case widthSize >= 960 && widthSize <= 1279:
+      case widthSize >= 1024 && widthSize <= 1279:
         if (this.pbfxItemSize === null && this.pbfxItemSizeMD === null) {
           return;
         }

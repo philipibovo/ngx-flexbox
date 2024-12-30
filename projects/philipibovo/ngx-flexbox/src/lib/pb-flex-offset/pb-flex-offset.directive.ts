@@ -25,7 +25,7 @@ const selector = `
   [pbFxOffset.xl],
 `;
 
-@Directive({ inputs, selector })
+@Directive({ inputs, selector, standalone: false })
 export class PbFlexOffsetDirective implements OnChanges {
   @Input(`pbFxOffset`) public pbfxItemOffset: string | null = ``;
   @Input(`pbFxOffset.xs`) public pbfxItemOffsetXS: string | null = ``;
@@ -56,7 +56,7 @@ export class PbFlexOffsetDirective implements OnChanges {
     this._currentElement = <HTMLFormElement>this._elementRef.nativeElement;
 
     switch (true) {
-      case widthSize >= 0 && widthSize <= 599:
+      case widthSize >= 0 && widthSize <= 767:
         if (!this.pbfxItemOffset && !this.pbfxItemOffsetXS) {
           return;
         }
@@ -66,7 +66,7 @@ export class PbFlexOffsetDirective implements OnChanges {
           : this.pbfxItemOffset!;
         break;
 
-      case widthSize >= 600 && widthSize <= 959:
+      case widthSize >= 768 && widthSize <= 1023:
         if (!this.pbfxItemOffset && !this.pbfxItemOffsetSM) {
           return;
         }
@@ -76,7 +76,7 @@ export class PbFlexOffsetDirective implements OnChanges {
           : this.pbfxItemOffset!;
         break;
 
-      case widthSize >= 960 && widthSize <= 1279:
+      case widthSize >= 1024 && widthSize <= 1279:
         if (!this.pbfxItemOffset && !this.pbfxItemOffsetMD) {
           return;
         }

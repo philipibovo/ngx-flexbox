@@ -37,7 +37,7 @@ const selector = `
   [pbFxLayoutAlign.xl]
 `;
 
-@Directive({ inputs, selector })
+@Directive({ inputs, selector, standalone: false })
 export class PbFlexLayoutDirective implements OnChanges {
   @Input(`pbFxLayout`) public pbfxAlignDirection: string = ``;
   @Input(`pbFxLayout.xs`) public pbfxAlignDirectionXS: string = ``;
@@ -75,7 +75,7 @@ export class PbFlexLayoutDirective implements OnChanges {
     this._currentElement = <HTMLFormElement>this._elementRef.nativeElement;
 
     switch (true) {
-      case widthSize >= 0 && widthSize <= 599:
+      case widthSize >= 0 && widthSize <= 767:
         this._directiveDirectionContent = this.pbfxAlignDirectionXS
           ? this.pbfxAlignDirectionXS
           : this.pbfxAlignDirection;
@@ -84,7 +84,7 @@ export class PbFlexLayoutDirective implements OnChanges {
           : this.pbfxAlignItems;
         break;
 
-      case widthSize >= 600 && widthSize <= 959:
+      case widthSize >= 768 && widthSize <= 1023:
         this._directiveDirectionContent = this.pbfxAlignDirectionSM
           ? this.pbfxAlignDirectionSM
           : this.pbfxAlignDirection;
@@ -93,7 +93,7 @@ export class PbFlexLayoutDirective implements OnChanges {
           : this.pbfxAlignItems;
         break;
 
-      case widthSize >= 960 && widthSize <= 1279:
+      case widthSize >= 1024 && widthSize <= 1279:
         this._directiveDirectionContent = this.pbfxAlignDirectionMD
           ? this.pbfxAlignDirectionMD
           : this.pbfxAlignDirection;

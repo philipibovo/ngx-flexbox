@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
 // Directives
 import { PbFlexGapDirective } from './pb-flex-gap/pb-flex-gap.directive';

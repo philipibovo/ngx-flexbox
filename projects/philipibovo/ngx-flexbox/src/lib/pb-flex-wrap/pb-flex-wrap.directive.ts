@@ -26,7 +26,7 @@ const selector = `
   [pbFxWrap.xl],
 `;
 
-@Directive({ inputs, selector })
+@Directive({ inputs, selector, standalone: false })
 export class PbFlexWrapDirective {
   @Input(`pbFxWrap`) public pbfxWrap: string | null = null;
   @Input(`pbFxWrap.xs`) public pbfxWrapXS: string | null = null;
@@ -62,7 +62,7 @@ export class PbFlexWrapDirective {
     this._currentElement = <HTMLFormElement>this._elementRef.nativeElement;
 
     switch (true) {
-      case widthSize >= 0 && widthSize <= 599:
+      case widthSize >= 0 && widthSize <= 767:
         if (!this.pbfxWrap && !this.pbfxWrapXS) {
           return;
         }
@@ -70,7 +70,7 @@ export class PbFlexWrapDirective {
         this.pbfxWrap = this.pbfxWrapXS ? this.pbfxWrapXS : this.pbfxWrap;
         break;
 
-      case widthSize >= 600 && widthSize <= 959:
+      case widthSize >= 768 && widthSize <= 1023:
         if (!this.pbfxWrap && !this.pbfxWrapSM) {
           return;
         }
@@ -78,7 +78,7 @@ export class PbFlexWrapDirective {
         this.pbfxWrap = this.pbfxWrapSM ? this.pbfxWrapSM : this.pbfxWrap;
         break;
 
-      case widthSize >= 960 && widthSize <= 1279:
+      case widthSize >= 1024 && widthSize <= 1279:
         if (!this.pbfxWrap && !this.pbfxWrapMD) {
           return;
         }

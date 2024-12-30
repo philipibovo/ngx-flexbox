@@ -27,7 +27,7 @@ const selector = `
   [pbFxOrder.xl],
 `;
 
-@Directive({ inputs, selector })
+@Directive({ inputs, selector, standalone: false })
 export class PbFlexOrderDirective implements OnChanges, OnInit {
   @Input(`pbFxOrder`) public pbfxItemOrder: string | null = null;
   @Input(`pbFxOrder.xs`) public pbfxItemOrderXS: string | null = null;
@@ -64,7 +64,7 @@ export class PbFlexOrderDirective implements OnChanges, OnInit {
     this._currentElement = <HTMLFormElement>this._elementRef.nativeElement;
 
     switch (true) {
-      case widthSize >= 0 && widthSize <= 599:
+      case widthSize >= 0 && widthSize <= 767:
         if (!this.pbfxItemOrder && !this.pbfxItemOrderXS) {
           return;
         }
@@ -74,7 +74,7 @@ export class PbFlexOrderDirective implements OnChanges, OnInit {
           : this.pbfxItemOrder!;
         break;
 
-      case widthSize >= 600 && widthSize <= 959:
+      case widthSize >= 768 && widthSize <= 1023:
         if (!this.pbfxItemOrder && !this.pbfxItemOrderSM) {
           return;
         }
@@ -84,7 +84,7 @@ export class PbFlexOrderDirective implements OnChanges, OnInit {
           : this.pbfxItemOrder!;
         break;
 
-      case widthSize >= 960 && widthSize <= 1279:
+      case widthSize >= 1024 && widthSize <= 1279:
         if (!this.pbfxItemOrder && !this.pbfxItemOrderMD) {
           return;
         }
